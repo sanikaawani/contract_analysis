@@ -1,0 +1,10 @@
+Flask
+flask-cors
+gunicorn
+numpy
+scikit-learn
+joblib
+nltk
+PyPDF2
+python-docx
+reportlab
