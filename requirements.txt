@@ -1,11 +1,11 @@
 Flask
 flask-cors
 gunicorn
-numpy
+numpy==1.26.4
 scikit-learn
 joblib
 nltk
-gensim
+gensim==4.3.3
 PyPDF2
 python-docx
 reportlab
