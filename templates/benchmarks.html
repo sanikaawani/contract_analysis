@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+{% block title %}ML Model Benchmarks & Comparison | LegalRisk AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-center gap-2 mb-1">
+      <span class="badge-tag text-blue-400 border-blue-500/30">Evaluation Metrics & Validation</span>
+      <span class="badge-tag font-mono">3 ML Classifiers</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Machine Learning Model Comparison & Benchmarks</h1>
+    <p class="text-slate-400 text-xs sm:text-sm mt-1">Comparative evaluation of Logistic Regression, Random Forest, and Multinomial Naive Bayes on 8 Indian Legal Clause Categories and 3 Risk Severity Levels.</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    
+    <div class="legal-card p-5 border-slate-800">
+      <div class="text-xs text-slate-400 uppercase font-semibold">Total Clauses Dataset</div>
+      <div id="bench-total-samples" class="text-2xl font-extrabold text-white mt-1">1,500</div>
+      <div class="text-[10px] text-emerald-400 font-mono mt-1">Stratified 75/25 Train-Test Split</div>
+    </div>
+
+    <div class="legal-card p-5 border-slate-800">
+      <div class="text-xs text-slate-400 uppercase font-semibold">Top Classifier Accuracy</div>
+      <div id="bench-top-acc" class="text-2xl font-extrabold text-blue-400 mt-1">100.00%</div>
+      <div class="text-[10px] text-slate-400 font-mono mt-1">Logistic Regression (TF-IDF)</div>
+    </div>
+
+    <div class="legal-card p-5 border-slate-800">
+      <div class="text-xs text-slate-400 uppercase font-semibold">Random Forest F1-Score</div>
+      <div id="bench-rf-f1" class="text-2xl font-extrabold text-purple-400 mt-1">99.47%</div>
+      <div class="text-[10px] text-slate-400 font-mono mt-1">5-Fold CV: 99.73% (±0.39%)</div>
+    </div>
+
+    <div class="legal-card p-5 border-slate-800">
+      <div class="text-xs text-slate-400 uppercase font-semibold">Risk Level Classifier</div>
+      <div id="bench-risk-acc" class="text-2xl font-extrabold text-emerald-400 mt-1">97.33%</div>
+      <div class="text-[10px] text-slate-400 font-mono mt-1">Multi-class (High / Med / Low)</div>
+    </div>
+
+  </div>
+
+  <!-- Main Comparison Table -->
+  <div class="legal-card p-6 border-slate-800 mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-base font-bold text-white">Clause Category Classification (8 Classes) Benchmark</h3>
+      <span class="badge-tag">Evaluation Report</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs text-left text-slate-300">
+        <thead class="bg-slate-900 text-slate-400 uppercase text-[10px] font-semibold">
+          <tr>
+            <th class="p-3.5">Algorithm</th>
+            <th class="p-3.5">Accuracy</th>
+            <th class="p-3.5">Precision (Weighted)</th>
+            <th class="p-3.5">Recall (Weighted)</th>
+            <th class="p-3.5">F1-Score (Weighted)</th>
+            <th class="p-3.5">5-Fold Cross Validation</th>
+            <th class="p-3.5 text-right">Feature Space</th>
+          </tr>
+        </thead>
+        <tbody id="benchmark-table-body" class="divide-y divide-slate-800 font-mono">
+          <!-- Injected via JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Visual Benchmark Chart & Confusion Matrix -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+    
+    <div class="legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-4">Model Performance Metric Comparison</h3>
+      <div class="h-64 relative">
+        <canvas id="benchmarkBarChart"></canvas>
+      </div>
+    </div>
+
+    <div class="legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-4">Risk Level Classifier Confusion Matrix</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-center text-slate-300 font-mono">
+          <thead class="bg-slate-900 text-slate-400 text-[10px] uppercase">
+            <tr>
+              <th class="p-2.5">Actual \ Pred</th>
+              <th class="p-2.5 text-rose-400">Pred: High</th>
+              <th class="p-2.5 text-amber-400">Pred: Med</th>
+              <th class="p-2.5 text-emerald-400">Pred: Low</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800" id="risk-cm-body">
+            <tr>
+              <td class="p-2.5 font-bold text-rose-400 bg-slate-950 text-left">Actual: High</td>
+              <td class="p-2.5 bg-rose-950/40 text-rose-200 font-bold" id="cm-hh">123</td>
+              <td class="p-2.5 bg-slate-900 text-slate-400" id="cm-hm">2</td>
+              <td class="p-2.5 bg-slate-900 text-slate-400" id="cm-hl">1</td>
+            </tr>
+            <tr>
+              <td class="p-2.5 font-bold text-amber-400 bg-slate-950 text-left">Actual: Med</td>
+              <td class="p-2.5 bg-slate-900 text-slate-400" id="cm-mh">3</td>
+              <td class="p-2.5 bg-amber-950/40 text-amber-200 font-bold" id="cm-mm">121</td>
+              <td class="p-2.5 bg-slate-900 text-slate-400" id="cm-ml">2</td>
+            </tr>
+            <tr>
+              <td class="p-2.5 font-bold text-emerald-400 bg-slate-950 text-left">Actual: Low</td>
+              <td class="p-2.5 bg-slate-900 text-slate-400" id="cm-lh">0</td>
+              <td class="p-2.5 bg-slate-900 text-slate-400" id="cm-lm">2</td>
+              <td class="p-2.5 bg-emerald-950/40 text-emerald-200 font-bold" id="cm-ll">121</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-[11px] text-slate-400 mt-3">High diagonal density confirms excellent generalization across risk tiers with minimal false negatives.</p>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const res = await fetch('/api/models/benchmark');
+      const data = await res.json();
+      if (data.success && data.benchmarks) {
+        renderBenchmarks(data.benchmarks);
+      }
+    } catch (e) {
+      console.error('Failed to load benchmarks:', e);
+    }
+  });
+
+  function renderBenchmarks(b) {
+    const models = b.clause_category_models || {};
+    const tbody = document.getElementById('benchmark-table-body');
+    tbody.innerHTML = '';
+
+    const modelNames = [];
+    const accuracies = [];
+    const f1Scores = [];
+    const precisions = [];
+    const recalls = [];
+
+    const featureSpaces = {
+      'Logistic Regression': 'TF-IDF (Unigram + Bigram, 3.5k)',
+      'Random Forest': 'Ensemble Trees (150 estimators)',
+      'Multinomial Naive Bayes': 'Count / TF-IDF Vocabulary'
+    };
+
+    for (const [name, m] of Object.entries(models)) {
+      modelNames.push(name);
+      accuracies.push((m.accuracy * 100).toFixed(1));
+      f1Scores.push((m.f1_weighted * 100).toFixed(1));
+      precisions.push((m.precision_weighted * 100).toFixed(1));
+      recalls.push((m.recall_weighted * 100).toFixed(1));
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="p-3.5 font-bold text-white">${name}</td>
+        <td class="p-3.5 text-blue-400 font-semibold">${(m.accuracy * 100).toFixed(2)}%</td>
+        <td class="p-3.5 text-purple-400">${(m.precision_weighted * 100).toFixed(2)}%</td>
+        <td class="p-3.5 text-yellow-400">${(m.recall_weighted * 100).toFixed(2)}%</td>
+        <td class="p-3.5 text-emerald-400 font-semibold">${(m.f1_weighted * 100).toFixed(2)}%</td>
+        <td class="p-3.5 text-slate-300">${(m.cv_mean * 100).toFixed(2)}% (±${(m.cv_std * 100).toFixed(2)}%)</td>
+        <td class="p-3.5 text-slate-400 text-right text-[11px]">${featureSpaces[name] || 'TF-IDF Features'}</td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    // Chart.js Benchmark Bar Chart
+    const ctx = document.getElementById('benchmarkBarChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: modelNames,
+        datasets: [
+          {
+            label: 'Accuracy (%)',
+            data: accuracies,
+            backgroundColor: '#3B82F6',
+            borderRadius: 4
+          },
+          {
+            label: 'F1-Score (%)',
+            data: f1Scores,
+            backgroundColor: '#A855F7',
+            borderRadius: 4
+          },
+          {
+            label: 'Precision (%)',
+            data: precisions,
+            backgroundColor: '#EAB308',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: '#94A3B8', font: { size: 10 } } }
+        },
+        scales: {
+          x: { ticks: { color: '#94A3B8', font: { size: 10 } }, grid: { color: '#1E293B' } },
+          y: { min: 90, max: 100, ticks: { color: '#94A3B8', font: { size: 10 } }, grid: { color: '#1E293B' } }
+        }
+      }
+    });
+
+    // Update Confusion matrix for risk classifier if available
+    const riskModel = b.risk_level_model;
+    if (riskModel && riskModel.confusion_matrix) {
+      const cm = riskModel.confusion_matrix;
+      if (cm.length === 3) {
+        document.getElementById('cm-hh').innerText = cm[0][0];
+        document.getElementById('cm-hm').innerText = cm[0][1];
+        document.getElementById('cm-hl').innerText = cm[0][2];
+        document.getElementById('cm-mh').innerText = cm[1][0];
+        document.getElementById('cm-mm').innerText = cm[1][1];
+        document.getElementById('cm-ml').innerText = cm[1][2];
+        document.getElementById('cm-lh').innerText = cm[2][0];
+        document.getElementById('cm-lm').innerText = cm[2][1];
+        document.getElementById('cm-ll').innerText = cm[2][2];
+      }
+    }
+  }
+</script>
+{% endblock %}

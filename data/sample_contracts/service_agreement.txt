@@ -1,0 +1,58 @@
+MASTER SERVICE AGREEMENT
+
+This Master Service Agreement ("Agreement") is made and entered into on this 15th day of January, 2026 ("Effective Date") at Bengaluru, Karnataka, India by and between:
+
+ALPHA TECH ENTERPRISES PVT. LTD., a private limited company incorporated under the Companies Act, 2013, having its registered office at 4th Floor, Tech Park, Outer Ring Road, Bengaluru 560103, Karnataka (hereinafter referred to as the "Client" or "Company");
+
+AND
+
+FASTGROWTH SOLUTIONS LLP, a limited liability partnership having its registered office at Suite 202, MG Road, Pune 411001, Maharashtra, represented by its Designated Partner Rajesh Sharma (hereinafter referred to as the "Service Provider" or "Vendor").
+
+RECITALS:
+WHEREAS, the Client is engaged in the business of digital payments and financial technology;
+WHEREAS, the Service Provider possesses specialized technical expertise in cloud infrastructure management, software development, and AI systems maintenance;
+WHEREAS, the Client desires to engage the Service Provider, and the Service Provider agrees to deliver services under the following terms:
+
+NOW, THEREFORE, IT IS AGREED AS FOLLOWS:
+
+1. SCOPE OF SERVICES
+1.1 The Service Provider shall perform software engineering, bug fixes, API integrations, and cloud maintenance services as specified in Statements of Work (SOWs) executed from time to time.
+1.2 Time is of the essence in the execution of all deliverables under this Agreement.
+
+2. PAYMENT TERMS
+2.1 Invoices shall be submitted monthly upon completion of milestones. The Client shall make payment within ninety (90) to one hundred twenty (120) days following receipt of an undisputed invoice. The Client reserves the right to withhold any payment at its sole discretion without incurring interest or liability.
+2.2 All fees are exclusive of Goods and Services Tax (GST) at 18%, and Tax Deducted at Source (TDS) shall be deducted under Section 194J of the Income Tax Act, 1961.
+
+3. TERM AND AUTOMATIC RENEWAL
+3.1 The Initial Term of this Agreement shall be twelve (12) months from the Effective Date.
+3.2 This Agreement shall automatically renew for successive terms of two (2) years each unless the Client provides written notice of non-renewal at least ninety (90) days prior to the expiration date. In the event of non-renewal by Vendor, Vendor shall pay an administrative exit fee of INR 1,50,000.
+
+4. LIMITATION OF LIABILITY AND INDEMNITY
+4.1 The Service Provider agrees to indemnify, defend, and hold harmless the Client, its affiliates, directors, and agents from any and all claims, losses, damages, liabilities, costs, and expenses without any monetary cap or limitation of liability whatsoever.
+4.2 The Vendor's total liability under or in connection with this Agreement shall be unlimited, and Vendor shall be liable for all direct, indirect, special, incidental, punitive, and consequential damages, including loss of profits and business interruption.
+
+5. PENALTIES AND LIQUIDATED DAMAGES
+5.1 In the event of any delay in deliverable submission, the Vendor shall pay liquidated damages of 2% of the total contract value for each day of delay, without any maximum cap, and the Client may immediately forfeit the entire Security Deposit and Bank Guarantee.
+5.2 Failure to meet agreed service levels (SLA) for two consecutive months will trigger an automatic penalty of 50% of the annual contract value as predetermined liquidated damages under Section 74 of the Indian Contract Act.
+
+6. TERMINATION
+6.1 The Client may terminate this Agreement at any time, with or without cause, immediately upon 24 hours written notice. The Vendor shall have no right to terminate for convenience and is locked into a mandatory three (3) year term.
+6.2 In the event of termination by the Client for any reason, the Service Provider shall immediately refund all fees received during the preceding six (6) months and surrender all work product without payment.
+
+7. CONFIDENTIALITY
+7.1 The obligations of confidentiality under this Agreement shall survive for a period of five (5) years following the expiration or termination of this Agreement.
+7.2 Confidential Information does not include information that is publicly known, already in the recipient's possession, or required to be disclosed by applicable law or regulatory authority under Indian statutes.
+
+8. NON-COMPETE AND RESTRICTIVE COVENANTS
+8.1 The Service Provider and its employees agree not to engage in any competing business, provide similar services, or work for any entity in the same industry anywhere in India or globally for a period of three (3) years following the termination of this Agreement (in potential contravention of Section 27 of the Indian Contract Act 1872).
+8.2 All intellectual property rights, pre-existing background code, proprietary tools, frameworks, and future inventions developed by the Vendor during the term shall become the sole and exclusive property of the Client as a work-made-for-hire, with Vendor waiving all moral rights.
+
+9. GOVERNING LAW AND DISPUTE RESOLUTION
+9.1 This Agreement shall be governed by and construed in accordance with the laws of India.
+9.2 Any dispute arising out of this Agreement shall be referred to arbitration in Bengaluru under the Arbitration and Conciliation Act, 1996 before a sole arbitrator appointed by the Client.
+
+IN WITNESS WHEREOF, the Parties have executed this Agreement by their duly authorized representatives.
+
+For ALPHA TECH ENTERPRISES PVT. LTD.      For FASTGROWTH SOLUTIONS LLP
+Authorized Signatory: Vikram Verma        Authorized Signatory: Rajesh Sharma
+Designation: Managing Director             Designation: Designated Partner

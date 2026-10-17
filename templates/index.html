@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% block title %}AI Contract Risk Analysis & Clause Detection System{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+
+  <!-- Hero Section -->
+  <div class="relative rounded-2xl overflow-hidden legal-card p-8 md:p-12 mb-12 border border-slate-700/80 bg-gradient-to-b from-slate-900/90 to-slate-950/90">
+    <div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    
+    <div class="relative z-10 max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-4">
+        <i data-feather="award" class="w-3.5 h-3.5"></i> Final Year NLP Academic & Production System
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+        AI-Based Contract Risk Analysis & <span class="gradient-text">Clause Detection</span> for SMBs
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+        Empowering small and medium enterprises with automated NLP contract intelligence. Automatically identify high-risk traps—evergreen auto-renewals, uncapped liabilities, hidden penalty fees, unilateral termination, and non-compete covenants—before signing.
+      </p>
+
+      <div class="flex flex-wrap gap-4 items-center">
+        <a href="{{ url_for('upload_page') }}" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/30 flex items-center gap-2 transition-all">
+          <i data-feather="file-text" class="w-4 h-4"></i> Upload & Analyze Contract
+        </a>
+        <a href="{{ url_for('nlp_lab_page') }}" class="px-6 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 font-semibold text-sm flex items-center gap-2 transition-all">
+          <i data-feather="cpu" class="w-4 h-4"></i> Explore 13 NLP Techniques
+        </a>
+        <a href="{{ url_for('benchmarks_page') }}" class="px-5 py-3 rounded-xl hover:bg-slate-800/50 text-slate-400 hover:text-white font-medium text-sm flex items-center gap-1.5 transition-all">
+          <i data-feather="bar-chart-2" class="w-4 h-4"></i> ML Benchmarks <i data-feather="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMB Problem vs AI Solution Matrix -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+    
+    <div class="legal-card p-6 border-slate-800">
+      <div class="w-10 h-10 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center mb-4">
+        <i data-feather="alert-octagon" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-base font-bold text-white mb-2">The SMB Vulnerability</h3>
+      <p class="text-slate-400 text-xs leading-relaxed">
+        Small businesses often lack expensive in-house legal counsel. Signing one-sided contracts with uncapped indemnities or liquidated penalties can lead to bankruptcy or protracted arbitration under Indian statutes.
+      </p>
+    </div>
+
+    <div class="legal-card p-6 border-slate-800">
+      <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mb-4">
+        <i data-feather="layers" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-base font-bold text-white mb-2">Multi-Tier NLP Pipeline</h3>
+      <p class="text-slate-400 text-xs leading-relaxed">
+        Combines 13 NLP techniques—Tokenization, Stemming, Lemmatization, POS Tagging, Chunking, NER, BoW, N-Grams, WordNet, Word2Vec, and Lesk WSD—for deep syntactic and semantic contract comprehension.
+      </p>
+    </div>
+
+    <div class="legal-card p-6 border-slate-800">
+      <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4">
+        <i data-feather="check-circle" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-base font-bold text-white mb-2">Actionable Negotiation Advice</h3>
+      <p class="text-slate-400 text-xs leading-relaxed">
+        Rather than merely flagging risks, the system provides plain-language AI explanations, specific clause redlines, and concrete counter-proposals tailored for SMB founders and procurement managers.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- End-to-End System Workflow Stepper -->
+  <div class="legal-card p-8 mb-12 border-slate-800">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-xl font-bold text-white">System Architecture & NLP Pipeline Workflow</h2>
+        <p class="text-slate-400 text-xs mt-1">Sequential flow from document ingestion to executive risk scoring and PDF generation</p>
+      </div>
+      <span class="badge-tag">Pipeline v2.0</span>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 text-center">
+      
+      <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="w-8 h-8 mx-auto rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs mb-2">1</div>
+        <div class="font-semibold text-xs text-white">Contract Upload</div>
+        <div class="text-[10px] text-slate-400 mt-1">PDF / DOCX / TXT</div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="w-8 h-8 mx-auto rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs mb-2">2</div>
+        <div class="font-semibold text-xs text-white">Text Extraction</div>
+        <div class="text-[10px] text-slate-400 mt-1">PyPDF2 / Docx / Clean</div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="w-8 h-8 mx-auto rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs mb-2">3</div>
+        <div class="font-semibold text-xs text-white">NLP Pipeline</div>
+        <div class="text-[10px] text-slate-400 mt-1">Tokenize, POS, Lemma, NER</div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="w-8 h-8 mx-auto rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs mb-2">4</div>
+        <div class="font-semibold text-xs text-white">Clause Detection</div>
+        <div class="text-[10px] text-slate-400 mt-1">8 Risk Categories</div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="w-8 h-8 mx-auto rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs mb-2">5</div>
+        <div class="font-semibold text-xs text-white">Risk Classification</div>
+        <div class="text-[10px] text-slate-400 mt-1">Low / Med / High</div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="w-8 h-8 mx-auto rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs mb-2">6</div>
+        <div class="font-semibold text-xs text-white">Risk Scoring</div>
+        <div class="text-[10px] text-slate-400 mt-1">0-100 Score Meter</div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="w-8 h-8 mx-auto rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs mb-2">7</div>
+        <div class="font-semibold text-xs text-white">Report & Advice</div>
+        <div class="text-[10px] text-slate-400 mt-1">AI Advice & PDF Export</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 8 Risk Categories Grid -->
+  <div class="mb-12">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="text-xl font-bold text-white">8 Evaluated Contract Risk Categories</h2>
+        <p class="text-slate-400 text-xs mt-0.5">Trained on Indian commercial contracts and statutory case law benchmarks</p>
+      </div>
+      <a href="{{ url_for('upload_page') }}" class="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1">
+        Test on sample agreement <i data-feather="arrow-right" class="w-3 h-3"></i>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <div class="legal-card p-4">
+        <div class="flex items-center gap-2 text-rose-400 font-semibold text-xs mb-1.5">
+          <i data-feather="repeat" class="w-4 h-4"></i> 1. Automatic Renewal
+        </div>
+        <p class="text-slate-400 text-[11px] leading-relaxed">
+          Detects evergreen rollover clauses, narrow non-renewal windows (<15 days), and unannounced price hikes.
+        </p>
+      </div>
+
+      <div class="legal-card p-4">
+        <div class="flex items-center gap-2 text-amber-400 font-semibold text-xs mb-1.5">
+          <i data-feather="dollar-sign" class="w-4 h-4"></i> 2. Payment Terms
+        </div>
+        <p class="text-slate-400 text-[11px] leading-relaxed">
+          Flags Net 90–120 day delays, unilateral withholding, subjective milestones, and 24% penal interest on SMBs.
+        </p>
+      </div>
+
+      <div class="legal-card p-4">
+        <div class="flex items-center gap-2 text-rose-400 font-semibold text-xs mb-1.5">
+          <i data-feather="shield-off" class="w-4 h-4"></i> 3. Liability Clauses
+        </div>
+        <p class="text-slate-400 text-[11px] leading-relaxed">
+          Identifies uncapped indemnity, loss of profits exposure, and lack of reciprocal liability caps.
+        </p>
+      </div>
+
+      <div class="legal-card p-4">
+        <div class="flex items-center gap-2 text-rose-400 font-semibold text-xs mb-1.5">
+          <i data-feather="alert-triangle" class="w-4 h-4"></i> 4. Penalty Clauses
+        </div>
+        <p class="text-slate-400 text-[11px] leading-relaxed">
+          Evaluates liquidated damages (2% per day), bank guarantee forfeitures, and Section 74 Indian Contract Act limits.
+        </p>
+      </div>
+
+      <div class="legal-card p-4">
+        <div class="flex items-center gap-2 text-amber-400 font-semibold text-xs mb-1.5">
+          <i data-feather="x-circle" class="w-4 h-4"></i> 5. Termination Clauses
+        </div>
+        <p class="text-slate-400 text-[11px] leading-relaxed">
+          Flags 24-hr unilateral termination for convenience, zero compensation for work-in-progress, and 3-year lock-ins.
+        </p>
+      </div>
+
+      <div class="legal-card p-4">
+        <div class="flex items-center gap-2 text-blue-400 font-semibold text-xs mb-1.5">
+          <i data-feather="lock" class="w-4 h-4"></i> 6. Confidentiality Clauses
+        </div>
+        <p class="text-slate-400 text-[11px] leading-relaxed">
+          Checks perpetual non-disclosure, ex-parte injunction risks, and missing standard trade secret carve-outs.
+        </p>
+      </div>
+
+      <div class="legal-card p-4">
+        <div class="flex items-center gap-2 text-rose-400 font-semibold text-xs mb-1.5">
+          <i data-feather="slash" class="w-4 h-4"></i> 7. Non-Compete Clauses
+        </div>
+        <p class="text-slate-400 text-[11px] leading-relaxed">
+          Flags post-termination trade restraints (void under Section 27 of Indian Contract Act 1872) and broad non-solicits.
+        </p>
+      </div>
+
+      <div class="legal-card p-4">
+        <div class="flex items-center gap-2 text-purple-400 font-semibold text-xs mb-1.5">
+          <i data-feather="sliders" class="w-4 h-4"></i> 8. Restrictive Clauses
+        </div>
+        <p class="text-slate-400 text-[11px] leading-relaxed">
+          Detects full forfeiture of background IP, unannounced physical/code audits, and negative public marketing covenants.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Quick Action Banner -->
+  <div class="rounded-xl p-8 bg-gradient-to-r from-blue-900/40 via-indigo-900/40 to-slate-900/80 border border-blue-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div>
+      <h3 class="text-lg font-bold text-white mb-1">Ready to inspect a commercial agreement?</h3>
+      <p class="text-slate-300 text-xs">Upload your contract or load an authentic Indian sample agreement with one click.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="{{ url_for('upload_page') }}" class="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shadow-md transition-all">
+        Launch Contract Upload
+      </a>
+      <a href="{{ url_for('about_page') }}" class="px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs transition-all">
+        View Project Docs
+      </a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

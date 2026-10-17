@@ -1,0 +1,27 @@
+MASTER SERVICE AGREEMENT
+
+This Master Service Agreement ("Agreement") is made and entered into as of 15th October 2024 ("Effective Date"), by and between Apex Tech Solutions Pvt Ltd, a company incorporated under the Companies Act, 2013 having its registered office at Cyber City, Gurugram, Haryana ("Client"), and Zenith Digital Services LLP, having its principal place of business at Indiranagar, Bengaluru, Karnataka ("Service Provider").
+
+1. SCOPE OF SERVICES
+The Service Provider agrees to deliver enterprise cloud migration and software development services as specified in Statements of Work issued hereunder.
+
+2. TERM AND AUTOMATIC RENEWAL
+This Agreement shall commence on the Effective Date and remain in effect for an Initial Term of 2 (two) years. Thereafter, this Agreement shall automatically renew for successive terms of 3 (three) years each unless the Client provides written notice of non-renewal by registered post at least 180 days prior to the expiration of the then-current term.
+
+3. PAYMENT AND INVOICING TERMS
+The Client shall make payments within 90 days from the invoice date. All fees are strictly non-refundable under any circumstance. Any delayed payment by Client shall not attract any interest, but any service delay by Service Provider shall attract a penalty of 2% per week.
+
+4. INDEMNITY AND UNLIMITED LIABILITY
+The Service Provider shall indemnify, defend, and hold harmless the Client, its affiliates, directors, and agents from and against any and all claims, losses, damages, liabilities, costs, and expenses (including uncapped indirect, consequential, and special damages) arising out of any breach, delay, or negligence without any monetary limitation whatsoever.
+
+5. NON-COMPETE RESTRICTIONS
+For a period of 3 (three) years following the termination of this Agreement for any reason, the Service Provider and its key promoters shall not directly or indirectly engage in, advise, invest in, or provide similar services to any business entity operating within India that competes with the Client.
+
+6. TERMINATION
+The Client may terminate this Agreement immediately at any time without cause and without notice. Upon such termination, the Service Provider shall not be entitled to any compensation or payment for work completed in progress.
+
+7. CONFIDENTIALITY
+The Receiving Party's duty of confidentiality shall survive perpetually and indefinitely following expiration or termination of this Agreement. Any disclosure, even inadvertent or required by legal proceedings, shall entitle Disclosing Party to immediate punitive injunctive relief and liquidated damages of INR 25,00,000.
+
+8. GOVERNING LAW AND DISPUTE RESOLUTION
+This Agreement shall be governed by the laws of India. Any dispute arising out of this Agreement shall be referred to arbitration in New Delhi, conducted in English under the Arbitration and Conciliation Act, 1996.

@@ -1,0 +1,24 @@
+COMMERCIAL GOODS AND HARDWARE SUPPLY AGREEMENT
+
+This Supply Agreement is made on 20th March 2025 by and between ElectroCraft Manufacturing India Ltd ("Buyer"), having its principal office at Peenya Industrial Area, Bengaluru, Karnataka, and PrimeComponents Tech Pvt Ltd ("Supplier"), having its registered facility at Hosur, Tamil Nadu.
+
+1. SUPPLY OF GOODS AND MINIMUM ORDER QUANTITY
+The Supplier covenants to manufacture and deliver electronic circuit modules in accordance with Purchase Orders issued periodically by Buyer, with an agreed annual value of INR 75,00,000.
+
+2. TERM AND AUTOMATIC RENEWAL
+Unless either party gives written notice of termination at least 60 days before the expiry of the Initial Term of 12 months, this Supply Agreement shall automatically renew for additional one-year periods.
+
+3. TERRITORIAL RESTRICTIONS AND EXCLUSIVITY
+Vendor grants Buyer an exclusive supply right within the state of Karnataka for a period of 12 months, during which Vendor shall not sell the specified SKU to other distributors in that territory.
+
+4. DELAYED DELIVERY PENALTY
+In the event of any delay in delivery exceeding 24 hours, the Vendor shall pay liquidated damages of 5% of the total contract value per calendar day of delay, up to a maximum forfeiture of 100% of the contract value.
+
+5. INSPECTION AND PAYMENT TERMS
+Payment for supplies shall be released upon milestone completion within 60 days of submission of physical invoices accompanied by satisfactory inspection certificates issued solely by Buyer's quality assurance team.
+
+6. LIMITATION OF LIABILITY
+Each party's total aggregate liability arising out of or related to this Agreement shall be limited to the total contract value paid by Buyer to Supplier in the preceding 6 months.
+
+7. GOVERNING LAW AND ARBITRATION
+This Agreement shall be governed by the laws of India. All disputes shall be settled through arbitration under the Arbitration and Conciliation Act, 1996 in Bengaluru.

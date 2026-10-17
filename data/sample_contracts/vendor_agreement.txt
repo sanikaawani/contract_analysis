@@ -1,0 +1,38 @@
+COMMERCIAL VENDOR SUPPLY AGREEMENT
+
+This Vendor Agreement ("Agreement") is executed on 1st March 2026 at Mumbai, Maharashtra between:
+
+RELIABLE INDUSTRIAL CORP LTD., Mumbai (hereinafter called the "Purchaser");
+AND
+MAHARASHTRA METAL CRAFTS PVT LTD., Pune (hereinafter called the "Vendor").
+
+1. SUPPLY OF GOODS
+1.1 The Vendor shall manufacture and supply industrial precision components as per Purchase Orders issued by the Purchaser.
+
+2. PAYMENT TERMS
+2.1 Payment shall be made by the Purchaser within forty-five (45) days of receipt of a valid and correct Goods and Services Tax (GST) compliant tax invoice.
+2.2 Any undisputed amount not paid within the due date shall bear simple interest at the rate of 12% per annum until settled.
+
+3. TERM AND EXTENSION
+3.1 Upon completion of the Initial Term, the contract shall be extended for successive six (6) month periods unless thirty (30) days prior written notice is served by either party.
+
+4. LIABILITY AND WARRANTY
+4.1 The Supplier's total liability for direct damages shall not exceed the total contract value, except in cases of gross negligence, fraud, or willful misconduct.
+4.2 Except for indemnification obligations relating to intellectual property infringement, neither party shall be liable for indirect, incidental, or consequential damages.
+
+5. PENALTY FOR DELAYS
+5.1 For delays attributable solely to the Vendor, liquidated damages shall accrue at the rate of 0.5% per week of delay, subject to an aggregate maximum cap of 10% of the affected milestone value.
+
+6. TERMINATION
+6.1 Either party may terminate this Agreement for convenience by providing sixty (60) days prior written notice to the other party.
+6.2 Either party may terminate this Agreement immediately upon written notice if the other party commits a material breach and fails to cure such breach within thirty (30) days.
+
+7. CONFIDENTIALITY
+7.1 Confidential Information shall be protected with the same degree of care as the Receiving Party uses for its own confidential information, but not less than reasonable care, for three (3) years post-termination.
+
+8. NON-SOLICITATION AND IP
+8.1 The Vendor agrees not to solicit or hire any employee or contractor of the Client directly involved in this project for a period of twelve (12) months following the termination of this Agreement.
+8.2 Custom deliverables created specifically for the Client shall belong to the Client upon full payment, while the Service Provider retains all rights to its pre-existing tools and background IP.
+
+9. JURISDICTION
+Governed by laws of India with exclusive jurisdiction of courts at Mumbai.

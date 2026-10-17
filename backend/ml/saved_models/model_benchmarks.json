@@ -1,0 +1,361 @@
+{
+  "dataset_summary": {
+    "total_samples": 180,
+    "categories_count": 9,
+    "categories": [
+      "Automatic Renewal",
+      "Confidentiality Clauses",
+      "General / Boilerplate",
+      "Liability Clauses",
+      "Non-Compete Clauses",
+      "Payment Terms",
+      "Penalty Clauses",
+      "Restrictive Clauses",
+      "Termination Clauses"
+    ],
+    "risk_levels": [
+      "High",
+      "Low",
+      "Medium"
+    ],
+    "contract_types": [
+      "Employment Agreement",
+      "Non-Disclosure Agreement (NDA)",
+      "Service Agreement",
+      "Supply Agreement",
+      "Vendor Agreement"
+    ]
+  },
+  "feature_comparison_category": [
+    {
+      "model_feature_combination": "Multinomial Naive Bayes (TF-IDF)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Logistic Regression (TF-IDF)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Linear SVM / LinearSVC (TF-IDF)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Random Forest (TF-IDF)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Logistic Regression (Word2Vec)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Random Forest (Word2Vec)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Multinomial Naive Bayes (BoW)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    }
+  ],
+  "feature_comparison_risk": [
+    {
+      "model_feature_combination": "Linear SVM (TF-IDF)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Logistic Regression (TF-IDF)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Multinomial Naive Bayes (TF-IDF)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Random Forest (TF-IDF)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    },
+    {
+      "model_feature_combination": "Random Forest (Word2Vec)",
+      "mean_accuracy": 100.0,
+      "mean_precision": 100.0,
+      "mean_recall": 100.0,
+      "mean_f1_score": 100.0
+    }
+  ],
+  "best_category_model_metrics": {
+    "algorithm": "Logistic Regression with Multi-Class TF-IDF (1-2 N-grams)",
+    "test_accuracy": 100.0,
+    "classification_report": {
+      "Automatic Renewal": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Confidentiality Clauses": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "General / Boilerplate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Liability Clauses": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Non-Compete Clauses": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Payment Terms": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Penalty Clauses": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Restrictive Clauses": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Termination Clauses": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 45.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 45.0
+      }
+    },
+    "labels": [
+      "Automatic Renewal",
+      "Confidentiality Clauses",
+      "General / Boilerplate",
+      "Liability Clauses",
+      "Non-Compete Clauses",
+      "Payment Terms",
+      "Penalty Clauses",
+      "Restrictive Clauses",
+      "Termination Clauses"
+    ],
+    "confusion_matrix": [
+      [
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5
+      ]
+    ]
+  },
+  "best_risk_model_metrics": {
+    "algorithm": "Logistic Regression with TF-IDF (1-2 N-grams)",
+    "test_accuracy": 100.0,
+    "classification_report": {
+      "High": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 13.0
+      },
+      "Low": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 23.0
+      },
+      "Medium": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 9.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 45.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 45.0
+      }
+    },
+    "labels": [
+      "Low",
+      "Medium",
+      "High"
+    ],
+    "confusion_matrix": [
+      [
+        23,
+        0,
+        0
+      ],
+      [
+        0,
+        9,
+        0
+      ],
+      [
+        0,
+        0,
+        13
+      ]
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+EXECUTIVE EMPLOYMENT AGREEMENT
+
+This Employment Agreement is entered into on 10th January 2025 between NextGen AI Technologies India Pvt Ltd ("Company"), located at HITEC City, Hyderabad, Telangana, and Rahul Sharma ("Employee"), residing at Whitefield, Bengaluru, Karnataka.
+
+1. POSITION AND REMUNERATION
+The Employee is appointed as Principal AI Architect with an annual Cost to Company (CTC) of INR 36,00,000 payable in monthly installments subject to statutory deductions.
+
+2. LOCK-IN PERIOD AND BOND PENALTY
+If the Employee resigns prior to completing 24 months of service, the Employee shall immediately pay to the Company a fixed penalty sum of INR 5,00,000 as training expense reimbursement without requiring proof of actual loss.
+
+3. POST-TERMINATION NON-COMPETE
+The Employee covenants that for 24 months post separation, the Employee shall not work for, consult, or start any business that offers similar services or products anywhere in South Asia.
+
+4. TERMINATION DISCRETION
+Employer reserves the unilateral right to terminate Employee's employment immediately without notice or severance pay for any reason deemed unsatisfactory in the sole and absolute discretion of the Management. Employee must provide 90 days notice period or salary in lieu thereof.
+
+5. INTELLECTUAL PROPERTY ASSIGNMENT
+All inventions, code, designs, and patentable ideas conceived during the employment period or within 6 months post-departure shall automatically vest with Company with full moral right assignment.
+
+6. GOVERNING LAW
+This contract is governed by the laws of India and subject to jurisdiction of courts in Hyderabad.

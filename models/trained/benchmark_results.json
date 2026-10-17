@@ -1,0 +1,363 @@
+{
+  "clause_category_models": {
+    "Logistic Regression": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "f1_macro": 1.0,
+      "precision_weighted": 1.0,
+      "recall_weighted": 1.0,
+      "f1_weighted": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "confusion_matrix": [
+        [
+          47,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          42,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          51,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          46,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          51,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          43,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          47,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          48
+        ]
+      ],
+      "classes": [
+        "Automatic Renewal",
+        "Confidentiality Clauses",
+        "Liability Clauses",
+        "Non-Compete Clauses",
+        "Payment Terms",
+        "Penalty Clauses",
+        "Restrictive Clauses",
+        "Termination Clauses"
+      ],
+      "filename": "clause_classifier_lr.joblib"
+    },
+    "Random Forest": {
+      "accuracy": 0.9947,
+      "precision_macro": 0.9949,
+      "recall_macro": 0.9943,
+      "f1_macro": 0.9945,
+      "precision_weighted": 0.9949,
+      "recall_weighted": 0.9947,
+      "f1_weighted": 0.9947,
+      "cv_mean": 0.9973,
+      "cv_std": 0.0039,
+      "confusion_matrix": [
+        [
+          47,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          41,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          51,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          45,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          51,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          43,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          47,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          48
+        ]
+      ],
+      "classes": [
+        "Automatic Renewal",
+        "Confidentiality Clauses",
+        "Liability Clauses",
+        "Non-Compete Clauses",
+        "Payment Terms",
+        "Penalty Clauses",
+        "Restrictive Clauses",
+        "Termination Clauses"
+      ],
+      "filename": "clause_classifier_rf.joblib"
+    },
+    "Multinomial Naive Bayes": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "f1_macro": 1.0,
+      "precision_weighted": 1.0,
+      "recall_weighted": 1.0,
+      "f1_weighted": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "confusion_matrix": [
+        [
+          47,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          42,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          51,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          46,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          51,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          43,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          47,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          48
+        ]
+      ],
+      "classes": [
+        "Automatic Renewal",
+        "Confidentiality Clauses",
+        "Liability Clauses",
+        "Non-Compete Clauses",
+        "Payment Terms",
+        "Penalty Clauses",
+        "Restrictive Clauses",
+        "Termination Clauses"
+      ],
+      "filename": "clause_classifier_nb.joblib"
+    }
+  },
+  "risk_level_model": {
+    "model_name": "Random Forest Risk Classifier",
+    "accuracy": 0.9733,
+    "precision_weighted": 0.9741,
+    "recall_weighted": 0.9733,
+    "f1_weighted": 0.9733,
+    "classes": [
+      "High",
+      "Medium",
+      "Low"
+    ],
+    "confusion_matrix": [
+      [
+        126,
+        0,
+        0
+      ],
+      [
+        2,
+        120,
+        4
+      ],
+      [
+        4,
+        0,
+        119
+      ]
+    ]
+  },
+  "dataset_summary": {
+    "total_samples": 1500,
+    "categories_count": {
+      "Payment Terms": 203,
+      "Liability Clauses": 203,
+      "Termination Clauses": 191,
+      "Automatic Renewal": 190,
+      "Restrictive Clauses": 187,
+      "Non-Compete Clauses": 184,
+      "Penalty Clauses": 172,
+      "Confidentiality Clauses": 170
+    },
+    "risk_levels_count": {
+      "High": 505,
+      "Medium": 502,
+      "Low": 493
+    }
+  }
+}

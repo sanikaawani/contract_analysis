@@ -1,0 +1,30 @@
+EXECUTIVE EMPLOYMENT AGREEMENT
+
+This Employment Agreement is entered into on 1st February 2026 at Gurugram, Haryana between:
+
+APEX CLOUD SERVICES INDIA PVT. LTD. ("Employer" or "Company");
+AND
+AMIT K. SHARMA ("Employee").
+
+1. POSITION AND DUTIES
+1.1 The Employee is appointed as Principal AI Engineer and shall perform technical research and architectural design duties.
+
+2. COMPENSATION AND EXPENSES
+2.1 Annual CTC of INR 32,00,000 payable monthly via direct bank deposit on the 1st of each month subject to statutory TDS and Provident Fund (PF) deductions.
+
+3. NOTICE PERIOD AND TERMINATION
+3.1 Either party may terminate employment with sixty (60) days written notice or payment of basic salary in lieu thereof.
+3.2 The Employee shall not be entitled to severance if terminated for cause (fraud, embezzlement, criminal misconduct).
+
+4. CONFIDENTIALITY
+4.1 The Employee agrees to keep all proprietary source code, algorithms, and customer data confidential for a period of three (3) years following cessation of employment.
+
+5. NON-COMPETE AND NON-SOLICIT
+5.1 The Employee/Contractor shall not accept employment or independent advisory roles with any client, vendor, or competitor of the Company worldwide for 2 years post-departure. (Note: Subject to Section 27 of the Indian Contract Act 1872).
+5.2 The Employee agrees not to solicit any company colleagues for a period of twelve (12) months following resignation.
+
+6. INTELLECTUAL PROPERTY ASSIGNMENT
+6.1 All inventions, patents, software, and trade secrets created by the Employee during the course of employment shall constitute work-for-hire and belong exclusively to the Company.
+
+7. GOVERNING LAW
+Governed by Indian Law; Courts at Gurugram shall have exclusive jurisdiction.

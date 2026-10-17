@@ -1,0 +1,30 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+This Mutual Non-Disclosure Agreement ("NDA") is made on 10th February 2026 at Hyderabad, Telangana between:
+
+QUANTUM DATA LABS PVT. LTD., Hyderabad ("Party A");
+AND
+NEXUS CONSULTING SERVICES LLP, Chennai ("Party B").
+
+1. PURPOSE
+The parties wish to explore a potential joint business partnership regarding AI analytics for legal and enterprise data ("Purpose").
+
+2. CONFIDENTIAL INFORMATION
+Confidential Information includes all technical, financial, and business data disclosed by one Party to the other.
+
+3. TERM AND CONFIDENTIALITY OBLIGATION
+3.1 The confidentiality obligations under this Agreement shall remain in effect for a reasonable period of two (2) years from the date of disclosure, after which all obligations shall expire.
+3.2 This Agreement shall terminate on the Expiration Date and shall only be renewed upon the mutual written agreement of both parties.
+
+4. EXCLUSIONS
+Confidential Information does not include info in the public domain, already known to recipient, or required by court order under Indian law.
+
+5. LIMITATION OF LIABILITY
+5.1 To the maximum extent permitted by applicable law, each party's total aggregate liability arising out of or related to this Agreement shall be strictly limited to direct proven damages not exceeding INR 10,00,000.
+5.2 Neither party shall be liable for indirect, punitive, or consequential damages.
+
+6. RETURN OF MATERIALS
+Within 15 days of written request, each party shall return or destroy all physical and electronic confidential files.
+
+7. GOVERNING LAW
+Governed by the laws of India, subject to the jurisdiction of courts in Hyderabad.

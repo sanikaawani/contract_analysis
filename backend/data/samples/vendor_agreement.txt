@@ -1,0 +1,24 @@
+VENDOR SERVICES AND PROCUREMENT AGREEMENT
+
+This Vendor Agreement ("Agreement") is executed on 1st November 2024 by and between Bharat Retail Logistics Ltd, having its corporate office at Bandra Kurla Complex, Mumbai ("Buyer"), and QuickServe IT Logistics LLP, located at Okhla Industrial Area, New Delhi ("Vendor").
+
+1. ENGAGEMENT AND SERVICES
+The Vendor agrees to provide third-party IT infrastructure maintenance and hardware support to Buyer facilities across Western India for a contract value of INR 45,00,000 per annum.
+
+2. PAYMENT TERMS AND WITHHOLDING
+The Client shall make payments within 120 days from the invoice date. In the event of any disputed line item, the Buyer reserves the right to withhold 100% of all pending invoices across all purchase orders indefinitely until dispute resolution.
+
+3. PENALTY AND DELAY CLAUSE
+In the event of any delay in service delivery exceeding 24 hours, the Vendor shall pay liquidated damages of 5% of the total monthly contract value per calendar day of delay, up to a maximum forfeiture of 100% of the quarterly fee.
+
+4. INTELLECTUAL PROPERTY AND RESTRICTIVE COVENANTS
+The Vendor agrees that all intellectual property, inventions, background code, preexisting frameworks, and methodologies utilized or touched during the project shall become the sole and exclusive property of the Client upon creation, with full waiver of all moral and royalty rights.
+
+5. NON-SOLICITATION
+The Vendor is strictly prohibited from hiring or soliciting any employee, contractor, or affiliate of the Buyer for a period of 5 years post-termination, with mandatory liquidated damages of INR 20,00,000 per violation.
+
+6. TERMINATION FOR CONVENIENCE
+Buyer may terminate this Agreement without cause upon giving 7 days written notice to Vendor. Vendor may only terminate for material uncured breach upon 90 days prior notice.
+
+7. GOVERNING LAW
+This contract is governed by Indian Law. The courts of Mumbai shall have exclusive jurisdiction.

@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+{% block title %}NLP Laboratory & Interactive Inspector | 13 NLP Techniques{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-center gap-2 mb-1">
+      <span class="badge-tag text-purple-400 border-purple-500/30">NLP Research & Practical Implementation</span>
+      <span class="badge-tag font-mono">13 Techniques</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Interactive NLP Laboratory & Visual Inspector</h1>
+    <p class="text-slate-400 text-xs sm:text-sm mt-1">Explore, experiment, and visualize the inner workings of all 13 NLP techniques on legal contract text.</p>
+  </div>
+
+  <!-- Interactive Input Console -->
+  <div class="legal-card p-6 mb-8 border-slate-800">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+      <label for="nlp-input-text" class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+        <i data-feather="terminal" class="w-3.5 h-3.5 text-blue-400"></i> Legal Clause / Contract Text to Inspect
+      </label>
+      
+      <!-- Preset Snippets -->
+      <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+        <span class="text-slate-400">Quick Presets:</span>
+        <button type="button" onclick="loadNlpSnippet('indemnity')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-blue-400 border border-slate-700">Uncapped Indemnity</button>
+        <button type="button" onclick="loadNlpSnippet('renewal')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-purple-400 border border-slate-700">Auto-Renewal</button>
+        <button type="button" onclick="loadNlpSnippet('noncompete')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-rose-400 border border-slate-700">Section 27 Non-Compete</button>
+        <button type="button" onclick="loadNlpSnippet('polysemy')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-yellow-400 border border-slate-700">Polysemy (Consideration)</button>
+      </div>
+    </div>
+
+    <textarea id="nlp-input-text" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-xs font-mono text-slate-200 outline-none focus:ring-2 focus:ring-blue-500 leading-relaxed" placeholder="Type or paste any legal contract clause or text here..."></textarea>
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-4">
+      <div class="flex items-center gap-3">
+        <label for="nlp-target-keyword" class="text-xs text-slate-300 font-medium whitespace-nowrap">Target Keyword (WordNet/WSD/W2V):</label>
+        <input type="text" id="nlp-target-keyword" value="terminate" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 font-mono outline-none focus:border-blue-500 w-36" />
+      </div>
+
+      <button type="button" id="run-nlp-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-md shadow-blue-600/30 flex items-center justify-center gap-2 transition-all">
+        <i data-feather="cpu" class="w-3.5 h-3.5"></i> Inspect All 13 NLP Techniques
+      </button>
+    </div>
+  </div>
+
+  <!-- 13 Techniques Tabbed Container -->
+  <div class="space-y-6">
+    
+    <!-- Tab Navigation Pills -->
+    <div class="flex flex-wrap items-center gap-1.5 pb-2 border-b border-slate-800 overflow-x-auto" id="nlp-tabs-nav">
+      <button type="button" onclick="switchNlpTab('tok')" class="nav-tab-btn active text-xs" data-tab="tok">1. Tokenization</button>
+      <button type="button" onclick="switchNlpTab('stop')" class="nav-tab-btn text-xs" data-tab="stop">2. Stopwords & Negation</button>
+      <button type="button" onclick="switchNlpTab('norm')" class="nav-tab-btn text-xs" data-tab="norm">3-5. Stemming vs Lemma</button>
+      <button type="button" onclick="switchNlpTab('pos')" class="nav-tab-btn text-xs" data-tab="pos">6. POS Tagging</button>
+      <button type="button" onclick="switchNlpTab('chunk')" class="nav-tab-btn text-xs" data-tab="chunk">7. Chunking & Frames</button>
+      <button type="button" onclick="switchNlpTab('ner')" class="nav-tab-btn text-xs" data-tab="ner">8. Named Entities (NER)</button>
+      <button type="button" onclick="switchNlpTab('bow')" class="nav-tab-btn text-xs" data-tab="bow">9. Bag of Words</button>
+      <button type="button" onclick="switchNlpTab('ngrams')" class="nav-tab-btn text-xs" data-tab="ngrams">10. N-Grams Collocations</button>
+      <button type="button" onclick="switchNlpTab('wordnet')" class="nav-tab-btn text-xs" data-tab="wordnet">11. WordNet Synonyms</button>
+      <button type="button" onclick="switchNlpTab('w2v')" class="nav-tab-btn text-xs" data-tab="w2v">12. Word2Vec Vectors</button>
+      <button type="button" onclick="switchNlpTab('wsd')" class="nav-tab-btn text-xs" data-tab="wsd">13. Lesk WSD & Polysemy</button>
+    </div>
+
+    <!-- Tab 1: Tokenization -->
+    <div id="tab-tok" class="nlp-tab-pane legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="scissors" class="w-4 h-4 text-blue-400"></i> Technique 1: Sentence & Word Tokenization
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Splits contract text into distinct grammatical sentences and lexical word tokens while preserving legal numbering patterns (e.g. 1.1, Clause 4(a)).
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+        <div>
+          <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Sentence Tokens (<span id="tok-sent-count">0</span> sentences)</span>
+          <div id="tok-sentences-list" class="space-y-2 max-h-80 overflow-y-auto pr-2"></div>
+        </div>
+        <div>
+          <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Word Tokens Sample (<span id="tok-word-count">0</span> total tokens)</span>
+          <div id="tok-words-cloud" class="flex flex-wrap gap-1.5 p-3 rounded-xl bg-slate-950 border border-slate-800 max-h-80 overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Stop Words -->
+    <div id="tab-stop" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="filter" class="w-4 h-4 text-purple-400"></i> Technique 2: Stop Word Removal with Legal Negation Preservation
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Standard NLTK stop word filtering discards words like <code class="text-rose-400 font-mono">not</code>, <code class="text-rose-400 font-mono">without</code>, and <code class="text-rose-400 font-mono">unless</code>. Our legal preprocessor strictly retains negation and obligation tokens to avoid flipping contractual liabilities!
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+        <div>
+          <span class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Preserved Critical Legal Negations</span>
+          <div id="stop-preserved-tokens" class="flex flex-wrap gap-2 p-3 rounded-xl bg-emerald-950/20 border border-emerald-900/40"></div>
+        </div>
+        <div>
+          <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Filtered Content Tokens (<span id="stop-retained-count">0</span> tokens)</span>
+          <div id="stop-filtered-tokens" class="flex flex-wrap gap-1.5 p-3 rounded-xl bg-slate-950 border border-slate-800 max-h-72 overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Stemming vs Lemmatization -->
+    <div id="tab-norm" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="git-commit" class="w-4 h-4 text-indigo-400"></i> Techniques 3, 4, 5: Morphological Normalization Comparison
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Side-by-side linguistic comparison of <span class="text-blue-400 font-semibold">Porter Stemmer</span> (heuristic rule stripping), <span class="text-purple-400 font-semibold">Lancaster Stemmer</span> (aggressive rule reduction), and <span class="text-emerald-400 font-semibold">WordNet Lemmatizer</span> (dictionary-based root reduction).
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left text-slate-300">
+          <thead class="bg-slate-900 text-slate-400 uppercase text-[10px] font-semibold">
+            <tr>
+              <th class="p-3">Original Word</th>
+              <th class="p-3">POS Tag</th>
+              <th class="p-3">Porter Stemmer</th>
+              <th class="p-3">Lancaster Stemmer</th>
+              <th class="p-3">WordNet Lemmatizer</th>
+              <th class="p-3 text-right">Linguistic Difference?</th>
+            </tr>
+          </thead>
+          <tbody id="norm-table-body" class="divide-y divide-slate-800 font-mono">
+            <!-- Injected via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 4: POS Tagging -->
+    <div id="tab-pos" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="code" class="w-4 h-4 text-cyan-400"></i> Technique 6: Part-of-Speech (POS) Tagging & Modal Obligation Scoring
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Tags lexical tokens using Penn Treebank tags. Modal verbs (<code class="text-purple-400 font-mono">MD</code>) are specifically analyzed to distinguish between mandatory legal obligations (<code class="text-rose-400 font-semibold">shall/must</code>) and discretionary liberties (<code class="text-emerald-400 font-semibold">may</code>).
+      </p>
+
+      <div id="pos-tokens-container" class="flex flex-wrap gap-2 p-4 rounded-xl bg-slate-950 border border-slate-800 mb-6"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+          <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">POS Tag Distribution</span>
+          <div id="pos-distribution-list" class="space-y-1.5 font-mono text-[11px]"></div>
+        </div>
+        <div class="p-4 rounded-xl bg-purple-950/20 border border-purple-900/40">
+          <span class="text-purple-300 font-semibold uppercase tracking-wider text-[10px] block mb-2">Modal Verb Legal Weightings</span>
+          <ul class="space-y-1 text-slate-300 text-[11px]">
+            <li><span class="text-rose-400 font-bold">shall / must</span>: Strict Mandatory Covenant (High Duty)</li>
+            <li><span class="text-amber-400 font-bold">will / agree to</span>: Future Binding Commitment (Medium Duty)</li>
+            <li><span class="text-emerald-400 font-bold">may / can</span>: Discretionary Permissive Liberty (Optional)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 5: Chunking -->
+    <div id="tab-chunk" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="git-branch" class="w-4 h-4 text-amber-400"></i> Technique 7: Chunking & Legal Obligation Frames
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Extracts syntactic phrase structures: Noun Phrases [NP], Verb Phrases [VP], and Legal Obligation Frames ([Subject NP] + [Obligation VP] + [Object NP]).
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs mb-6">
+        <div>
+          <span class="text-blue-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Extracted Noun Phrases (NP)</span>
+          <div id="chunk-np-list" class="flex flex-wrap gap-2"></div>
+        </div>
+        <div>
+          <span class="text-purple-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Extracted Verb Phrases (VP)</span>
+          <div id="chunk-vp-list" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <div>
+        <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Syntactic Parse Tree String</span>
+        <pre id="chunk-tree-pre" class="p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[11px] text-emerald-400 overflow-x-auto max-h-48"></pre>
+      </div>
+    </div>
+
+    <!-- Tab 6: NER -->
+    <div id="tab-ner" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="tag" class="w-4 h-4 text-pink-400"></i> Technique 8: Named Entity Recognition (NER)
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Recognizes and extracts critical business entities from contract text: Organizations, Signatories, Dates, Money Sums, Durations, and Governing Laws.
+      </p>
+
+      <div id="ner-chips-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+    <!-- Tab 7: Bag of Words -->
+    <div id="tab-bow" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="grid" class="w-4 h-4 text-yellow-400"></i> Technique 9: Bag of Words (BoW) Frequency Model
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Builds unweighted vocabulary counts using CountVectorizer to quantify term presence across the contract.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left text-slate-300">
+          <thead class="bg-slate-900 text-slate-400 uppercase text-[10px] font-semibold">
+            <tr>
+              <th class="p-3">Rank</th>
+              <th class="p-3">Vocabulary Token</th>
+              <th class="p-3">Frequency Count</th>
+              <th class="p-3">Relative Density Bar</th>
+            </tr>
+          </thead>
+          <tbody id="bow-table-body" class="divide-y divide-slate-800 font-mono">
+            <!-- Injected via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 8: N-Grams -->
+    <div id="tab-ngrams" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="maximize-2" class="w-4 h-4 text-orange-400"></i> Technique 10: N-Gram Analysis & High-Risk Collocations
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Detects multi-word contiguous sequences (Unigrams, Bigrams, Trigrams) and matches them against known dangerous legal collocations.
+      </p>
+
+      <div class="mb-6">
+        <span class="text-rose-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Detected High-Risk Legal Collocations</span>
+        <div id="ngrams-risk-collocations" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <span class="text-slate-400 font-semibold text-[10px] uppercase block mb-2">Top Unigrams (1-grams)</span>
+          <div id="ngrams-unigrams" class="space-y-1 font-mono"></div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <span class="text-slate-400 font-semibold text-[10px] uppercase block mb-2">Top Bigrams (2-grams)</span>
+          <div id="ngrams-bigrams" class="space-y-1 font-mono"></div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <span class="text-slate-400 font-semibold text-[10px] uppercase block mb-2">Top Trigrams (3-grams)</span>
+          <div id="ngrams-trigrams" class="space-y-1 font-mono"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 9: WordNet Synonyms -->
+    <div id="tab-wordnet" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="book-open" class="w-4 h-4 text-blue-400"></i> Technique 11: WordNet Synonym Expansion
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Expands user search keywords into lexical synsets, hypernyms (broader terms), and domain-specific legal variants.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+        <div class="space-y-4">
+          <div>
+            <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-1">Query Keyword:</span>
+            <span id="wn-query-word" class="font-mono text-sm font-bold text-blue-400">terminate</span>
+          </div>
+          <div>
+            <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">WordNet Synonyms & Lexical Variants:</span>
+            <div id="wn-synonyms-list" class="flex flex-wrap gap-2"></div>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Legal Domain-Specific Equivalents:</span>
+            <div id="wn-legal-synonyms" class="flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">WordNet Synset Definitions & Examples:</span>
+          <div id="wn-definitions-list" class="space-y-2.5 max-h-80 overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 10: Word2Vec -->
+    <div id="tab-w2v" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="compass" class="w-4 h-4 text-emerald-400"></i> Technique 12: Word2Vec Continuous Vector Embeddings
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Dense 100-dimensional semantic vectors trained directly on the legal contract corpus using Gensim Skip-gram architecture.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+        <div>
+          <span class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Nearest Semantic Neighbors (Cosine Similarity)</span>
+          <div id="w2v-neighbors-list" class="space-y-2"></div>
+        </div>
+        <div>
+          <span class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] block mb-2">Dense Vector Representation Preview (100-dim)</span>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 space-y-1">
+            <div>Vector Dimensions: <span id="w2v-dim-count" class="text-white font-bold">100</span></div>
+            <div>Sample Slice: <span id="w2v-vector-slice" class="text-emerald-400">[-0.0412, 0.1245, -0.0931, 0.0514, ...]</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 11: Lesk WSD -->
+    <div id="tab-wsd" class="nlp-tab-pane hidden legal-card p-6 border-slate-800">
+      <h3 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+        <i data-feather="help-circle" class="w-4 h-4 text-yellow-400"></i> Technique 13: Word Sense Disambiguation (Adapted Lesk)
+      </h3>
+      <p class="text-slate-400 text-xs mb-4 leading-relaxed">
+        Resolves polysemic legal terminology (e.g. <span class="text-yellow-400 font-semibold">consideration</span>, <span class="text-yellow-400 font-semibold">execution</span>, <span class="text-yellow-400 font-semibold">party</span>) between lay definitions and legal statutory definitions.
+      </p>
+
+      <div class="space-y-4 text-xs">
+        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+          <div class="text-[10px] text-slate-400 uppercase font-semibold mb-1">Context Sentence Evaluated:</div>
+          <p id="wsd-context-sentence" class="font-mono text-slate-200 text-[11px]"></p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-blue-950/20 border border-blue-900/40">
+            <span class="text-blue-400 font-bold uppercase tracking-wider text-[10px] block mb-1">Disambiguated Sense (Lesk Synset)</span>
+            <div id="wsd-synset-name" class="font-mono text-sm text-white font-semibold mb-1"></div>
+            <div id="wsd-definition" class="text-slate-300 text-[11px] leading-relaxed"></div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-purple-950/20 border border-purple-900/40">
+            <span class="text-purple-400 font-bold uppercase tracking-wider text-[10px] block mb-1">Legal vs Lay Meaning Contrast</span>
+            <div id="wsd-contrast-content" class="space-y-1.5 text-slate-300 text-[11px]"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/nlp_inspector.js') }}"></script>
+{% endblock %}

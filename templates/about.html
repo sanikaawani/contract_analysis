@@ -1,0 +1,447 @@
+{% extends 'base.html' %}
+{% block title %}About Project, Architecture & Viva Guide | LegalRisk AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-center gap-2 mb-1">
+      <span class="badge-tag text-purple-400 border-purple-500/30">Academic Documentation & System Engineering</span>
+      <span class="badge-tag font-mono">Viva Voce Hub</span>
+    </div>
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">System Design, Architecture & Viva Voce Guide</h1>
+    <p class="text-slate-400 text-xs sm:text-sm mt-1">Complete technical specifications, UML diagrams, ER schemas, and 30+ comprehensive Viva questions & answers.</p>
+  </div>
+
+  <!-- Quick Anchors -->
+  <div class="flex flex-wrap gap-2 mb-8 text-xs">
+    <a href="#section-problem" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300">1. Problem Statement</a>
+    <a href="#section-architecture" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300">2. System Architecture</a>
+    <a href="#section-uml" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300">3. UML & ER Diagrams</a>
+    <a href="#section-api" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300">4. REST API Docs</a>
+    <a href="#section-viva" class="px-3 py-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-900/60 border border-blue-800/60 text-blue-300 font-semibold">5. 30+ Viva Q&A</a>
+  </div>
+
+  <div class="space-y-12">
+    
+    <!-- 1. Problem Statement -->
+    <section id="section-problem" class="legal-card p-8 border-slate-800">
+      <h2 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
+        <i data-feather="target" class="w-4 h-4 text-blue-400"></i> 1. Problem Statement & Legal Context
+      </h2>
+      <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+        <p>
+          Small and medium-sized businesses (SMBs) represent the backbone of commercial supply chains but are disproportionately exposed to contractual hazards. Hiring commercial legal counsel for every vendor or client contract costs between INR 15,000 and INR 75,000 per review—an unviable expense for fast-moving startups and small enterprises.
+        </p>
+        <p>
+          As a result, SMBs frequently execute standard boilerplate agreements containing insidious legal traps:
+        </p>
+        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2 font-mono text-[11px]">
+          <li><span class="text-white">Evergreen Auto-Renewal</span>: Multi-year rollovers with exit penalties or <15-day non-renewal windows.</li>
+          <li><span class="text-white">Uncapped Liabilities & Indemnities</span>: Assumption of indirect, special, and consequential losses.</li>
+          <li><span class="text-white">Section 27 Indian Contract Act Non-Competes</span>: Post-termination restraints of trade that hinder the SMB's commercial livelihood.</li>
+          <li><span class="text-white">Unilateral Termination</span>: 24-hr exit rights with forfeiture of work-in-progress compensation.</li>
+          <li><span class="text-white">Section 74 Punitive Liquidated Damages</span>: Arbitrary daily penalties (2-5% per day) exceeding reasonable compensation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2. System Architecture -->
+    <section id="section-architecture" class="legal-card p-8 border-slate-800">
+      <h2 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
+        <i data-feather="layers" class="w-4 h-4 text-purple-400"></i> 2. System Architecture & NLP Workflow
+      </h2>
+      
+      <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[11px] text-slate-300 leading-relaxed overflow-x-auto mb-6">
+        <pre class="text-blue-400 font-bold mb-2">+---------------------------------------------------------------------------------------------------+</pre>
+        <pre class="text-white font-bold">|                                 LEGALRISK AI SYSTEM ARCHITECTURE                                  |</pre>
+        <pre class="text-blue-400 font-bold">+---------------------------------------------------------------------------------------------------+</pre>
+        <pre>                                                                                                     </pre>
+        <pre>   [ CONTRACT DOCUMENT ]  --> (PDF / DOCX / TXT Ingestion & Normalization)                          </pre>
+        <pre>            |                                                                                        </pre>
+        <pre>            v                                                                                        </pre>
+        <pre>   [ NLP PREPROCESSING ]  --> 1. Sentence Tokenizer (Legal regex boundary preserver)                 </pre>
+        <pre>                          --> 2. Word Tokenizer (Punctuation & Currency normalizer)                  </pre>
+        <pre>                          --> 3. Stop Word Removal (Preserves legal negations: not/unless/without)   </pre>
+        <pre>                          --> 4-5. Porter & Lancaster Stemmers                                       </pre>
+        <pre>                          --> 6. WordNet Lemmatizer (POS tag-guided root extraction)                 </pre>
+        <pre>            |                                                                                        </pre>
+        <pre>            v                                                                                        </pre>
+        <pre>   [ LINGUISTIC PARSER ]  --> 7. POS Tagging (Penn Treebank & Modal Verb obligation weights)         </pre>
+        <pre>                          --> 8. Chunking (NP/VP Grammars & Legal Obligation Frames)                 </pre>
+        <pre>                          --> 9. Named Entity Recognition (ORG, PERSON, DATE, MONEY, DURATION, LAW)  </pre>
+        <pre>            |                                                                                        </pre>
+        <pre>            v                                                                                        </pre>
+        <pre>   [ FEATURE MATRIX ]     --> 10. Bag of Words (CountVectorizer frequency counts)                   </pre>
+        <pre>                          --> 11. TF-IDF Matrix (Sublinear TF + Unigram/Bigram n-grams)              </pre>
+        <pre>                          --> 12. Word2Vec 100-dim Legal Embeddings (Gensim Skip-gram)              </pre>
+        <pre>                          --> 13. WordNet Synonym Expander & Lesk Word Sense Disambiguation          </pre>
+        <pre>            |                                                                                        </pre>
+        <pre>            v                                                                                        </pre>
+        <pre>   [ ML RISK ENGINES ]    --> Clause Classifier (Logistic Regression / Random Forest / Naive Bayes)  </pre>
+        <pre>                          --> Risk Level Classifier (High / Medium / Low Multi-Class)                </pre>
+        <pre>                          --> Indian Legal Rule Engine (Section 27, Section 74, Evergreen, Indemnity)</pre>
+        <pre>            |                                                                                        </pre>
+        <pre>            v                                                                                        </pre>
+        <pre>   [ REPORTING & UI ]     --> Composite 0-100 Risk Score & Interactive Dashboard                     </pre>
+        <pre>                          --> AI Legal Explanations & Actionable SMB Counter-Proposals               </pre>
+        <pre>                          --> ReportLab Automated PDF Risk Assessment Report Export                  </pre>
+      </div>
+    </section>
+
+    <!-- 3. UML & ER Diagrams -->
+    <section id="section-uml" class="legal-card p-8 border-slate-800">
+      <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+        <i data-feather="cpu" class="w-4 h-4 text-emerald-400"></i> 3. UML Diagrams & Database Entity Relationships
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+        
+        <!-- Class Diagram -->
+        <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 font-mono">
+          <span class="text-emerald-400 font-bold uppercase text-[10px] block mb-2">UML Class Diagram</span>
+          <pre class="text-slate-300 text-[10px] leading-tight overflow-x-auto">
++------------------------------------+
+|         TextExtractor              |
++------------------------------------+
+| - raw_bytes: bytes                 |
+| - extension: str                   |
++------------------------------------+
+| + extract_from_pdf(): str          |
+| + extract_from_docx(): str         |
+| + clean_contract_text(): str       |
++------------------------------------+
+                 ^
+                 |
++------------------------------------+
+|         NLPPreprocessor            |
++------------------------------------+
+| + tokenize_sentences(): List[str]  |
+| + tokenize_words(): List[str]      |
+| + remove_stopwords(): List[str]    |
+| + apply_porter_stemmer(): List[str]|
+| + apply_lemmatization(): List[str] |
++------------------------------------+
+                 ^
+                 |
++------------------------------------+
+|         RiskScorerEngine           |
++------------------------------------+
+| + detect_clauses(): List[Clause]   |
+| + classify_risk(): RiskLevel       |
+| + compute_score(): int (0-100)     |
+| + generate_pdf_report(): bytes     |
++------------------------------------+
+          </pre>
+        </div>
+
+        <!-- Use Case Diagram -->
+        <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 font-mono">
+          <span class="text-blue-400 font-bold uppercase text-[10px] block mb-2">UML Use Case Diagram</span>
+          <pre class="text-slate-300 text-[10px] leading-tight overflow-x-auto">
+      +-----------------------------------------+
+      |        LEGALRISK AI SYSTEM USE CASES    |
+      +-----------------------------------------+
+ (SMB User) --------> [ UC1: Upload Contract PDF/DOCX ]
+     |
+     |--------------> [ UC2: Run NLP & ML Analysis ]
+     |                        |
+     |                        +---> <<include>> [ Clause Detection ]
+     |                        +---> <<include>> [ Risk Scoring ]
+     |                        +---> <<include>> [ NER Extraction ]
+     |
+     |--------------> [ UC3: Inspect 13 NLP Techniques ]
+     |
+     |--------------> [ UC4: Compare ML Benchmarks ]
+     |
+     +--------------> [ UC5: Download PDF Report ]
+          </pre>
+        </div>
+
+        <!-- Sequence Diagram -->
+        <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 font-mono">
+          <span class="text-yellow-400 font-bold uppercase text-[10px] block mb-2">UML Sequence Diagram</span>
+          <pre class="text-slate-300 text-[10px] leading-tight overflow-x-auto">
+User         Frontend (UI)       Flask API        NLP & ML Engine
+ |                 |                 |                   |
+ |-- 1. Upload --->|                 |                   |
+ |                 |-- 2. POST File->|                   |
+ |                 |                 |-- 3. Preprocess ->|
+ |                 |                 |-- 4. Detect Cls ->|
+ |                 |                 |-- 5. Score Risk ->|
+ |                 |                 |<- 6. JSON Data ---|
+ |                 |<- 7. Render ----|                   |
+ |                 |   Dashboard     |                   |
+ |-- 8. Req PDF -->|                 |                   |
+ |                 |-- 9. Gen PDF -->|-- 10. ReportLab ->|
+ |<- 11. PDF Downl-|                 |                   |
+          </pre>
+        </div>
+
+        <!-- ER Diagram -->
+        <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 font-mono">
+          <span class="text-pink-400 font-bold uppercase text-[10px] block mb-2">Entity Relationship (ER) Schema</span>
+          <pre class="text-slate-300 text-[10px] leading-tight overflow-x-auto">
++------------------+         1 : N         +-------------------+
+|     CONTRACT     |---------------------->|   DETECTED_CLAUSE |
++------------------+                       +-------------------+
+| PK contract_id   |                       | PK clause_id      |
+|    filename      |                       | FK contract_id    |
+|    contract_type |                       |    clause_number  |
+|    total_words   |                       |    category       |
+|    overall_score |                       |    risk_level     |
+|    created_at    |                       |    risk_score     |
++------------------+                       |    explanation    |
+        |                                  |    recommendation |
+        | 1 : 1                            +-------------------+
+        v
++------------------+
+| EXTRACTED_ENTITY |
++------------------+
+| PK entity_id     |
+| FK contract_id   |
+|    entity_type   |
+|    entity_value  |
+|    start_pos     |
++------------------+
+          </pre>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. REST API Documentation -->
+    <section id="section-api" class="legal-card p-8 border-slate-800">
+      <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+        <i data-feather="code" class="w-4 h-4 text-cyan-400"></i> 4. REST API Documentation
+      </h2>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left text-slate-300 font-mono">
+          <thead class="bg-slate-900 text-slate-400 text-[10px] uppercase">
+            <tr>
+              <th class="p-3">Method</th>
+              <th class="p-3">Endpoint</th>
+              <th class="p-3">Request Payload</th>
+              <th class="p-3">Response Output</th>
+              <th class="p-3">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800 text-[11px]">
+            <tr>
+              <td class="p-3 text-emerald-400 font-bold">POST</td>
+              <td class="p-3 text-white">/api/upload</td>
+              <td class="p-3 text-slate-400">multipart/form-data (file)</td>
+              <td class="p-3 text-slate-300">{ success, metadata, raw_text }</td>
+              <td class="p-3 text-slate-400">Extracts text from PDF/DOCX/TXT</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-emerald-400 font-bold">POST</td>
+              <td class="p-3 text-white">/api/analyze</td>
+              <td class="p-3 text-slate-400">{ text, contract_type, model_type }</td>
+              <td class="p-3 text-slate-300">{ risk_score, clauses, entities, recommendations }</td>
+              <td class="p-3 text-slate-400">Runs full NLP & ML Risk pipeline</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-emerald-400 font-bold">POST</td>
+              <td class="p-3 text-white">/api/nlp-inspect</td>
+              <td class="p-3 text-slate-400">{ text, keyword }</td>
+              <td class="p-3 text-slate-300">{ nlp_data: { 13 techniques } }</td>
+              <td class="p-3 text-slate-400">Inspects all 13 NLP techniques</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-blue-400 font-bold">GET</td>
+              <td class="p-3 text-white">/api/samples</td>
+              <td class="p-3 text-slate-400">None</td>
+              <td class="p-3 text-slate-300">{ samples: [...] }</td>
+              <td class="p-3 text-slate-400">Lists 5 authentic Indian agreements</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-blue-400 font-bold">GET</td>
+              <td class="p-3 text-white">/api/models/benchmark</td>
+              <td class="p-3 text-slate-400">None</td>
+              <td class="p-3 text-slate-300">{ benchmarks: { LR, RF, NB } }</td>
+              <td class="p-3 text-slate-400">Retrieves ML comparison metrics</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-emerald-400 font-bold">POST</td>
+              <td class="p-3 text-white">/api/report/download</td>
+              <td class="p-3 text-slate-400">{ analysis_data }</td>
+              <td class="p-3 text-slate-300">application/pdf attachment</td>
+              <td class="p-3 text-slate-400">Generates ReportLab PDF Report</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. 30+ Comprehensive Viva Voce Questions & Answers -->
+    <section id="section-viva" class="legal-card p-8 border-slate-800">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <i data-feather="help-circle" class="w-4 h-4 text-yellow-400"></i> 5. Comprehensive Viva Voce Questions & Detailed Answers
+          </h2>
+          <p class="text-slate-400 text-xs mt-1">30+ expert examiner questions categorized across NLP, Feature Engineering, Machine Learning, and Legal Domain.</p>
+        </div>
+        <span class="badge-tag">Viva Preparation Guide</span>
+      </div>
+
+      <div class="space-y-6 text-xs">
+        
+        <!-- Category A: NLP Fundamentals -->
+        <div>
+          <h3 class="text-sm font-bold text-blue-400 uppercase tracking-wider mb-3">Category A: NLP Pipeline & Linguistic Techniques</h3>
+          
+          <div class="space-y-4">
+            
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q1: What is the difference between Stemming and Lemmatization, and why did you implement both Porter and Lancaster stemmers?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-blue-400">Answer:</b> Stemming is a crude heuristic process that chops off suffixes from words (e.g. <i>"indemnified" &rarr; "indemnifi"</i> in Porter), which often results in non-dictionary roots. In contrast, <b>Lemmatization</b> uses vocabulary and morphological analysis with WordNet to return base dictionary lemmas (e.g. <i>"indemnified" &rarr; "indemnify"</i>). We implemented both <b>Porter</b> (standard rule-based reduction) and <b>Lancaster</b> (more aggressive iterative reduction) to demonstrate comparative over-stemming and under-stemming metrics during contract clause classification.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q2: Why is standard NLTK stop word removal dangerous for legal contract NLP, and how did you solve it?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-blue-400">Answer:</b> Standard stop word lists remove words like <i>"not", "never", "without", "unless", "except", "shall"</i>. In legal agreements, removing <i>"not"</i> completely reverses liability from <i>"Party A shall not be liable"</i> to <i>"Party A shall be liable"</i>! We solved this by creating a <b>domain-adapted legal stop word filter</b> that preserves all conditional negations and modal verbs while filtering conversational noise.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q3: How does Part-of-Speech (POS) Tagging help detect contract risk?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-blue-400">Answer:</b> We focus heavily on <b>Modal Verbs (MD)</b>. Words like <i>"shall"</i> and <i>"must"</i> represent mandatory legal imperatives that enforce strict liabilities, whereas words like <i>"may"</i> or <i>"can"</i> represent permissive liberties. POS tagging allows our risk engine to quantify the density of mandatory covenants versus permissive rights to compute contractual balance.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q4: What is Chunking and how is it used in Legal Obligation Framing?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-blue-400">Answer:</b> Chunking (shallow parsing) groups consecutive words into syntactic constituents like Noun Phrases (NP) and Verb Phrases (VP). We created a custom RegexpParser grammar: <code>CLAUSE: {&lt;NP&gt;&lt;VP&gt;&lt;NP&gt;}</code> that extracts structured obligation frames: <i>[the Service Provider] [shall indemnify and hold harmless] [the Client]</i>, clearly isolating the Obligor, Action, and Obligee.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q5: What entities does your Named Entity Recognition (NER) pipeline extract from Indian contracts?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-blue-400">Answer:</b> Our NER engine uses spaCy (<code>en_core_web_sm</code>) augmented with Indian legal regex boosters to extract 6 critical entity classes:
+                1. <b>Organizations</b> (Pvt Ltd, LLP, Ltd), 2. <b>Signatories</b> (Person names, Managing Directors), 3. <b>Key Dates</b> (Effective, Renewal, Expiry), 4. <b>Money Sums</b> (INR ₹ amounts, Lakhs, Crores), 5. <b>Durations</b> (months, years, days), and 6. <b>Governing Acts</b> (Indian Contract Act 1872, Arbitration Act 1996, IT Act 2000).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q6: How does Word Sense Disambiguation (WSD) using the Lesk algorithm resolve legal polysemy?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-blue-400">Answer:</b> Polysemous words have multiple meanings. For example, <i>"consideration"</i> in everyday English means thoughtful kindness, but under Section 2(d) of the Indian Contract Act, it strictly means price or value given in exchange for a promise. The Adapted Lesk algorithm computes word overlap between dictionary gloss definitions and the sentence context to disambiguate and assign the correct legal sense.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Category B: Feature Engineering & Embeddings -->
+        <div>
+          <h3 class="text-sm font-bold text-purple-400 uppercase tracking-wider mb-3">Category B: Feature Engineering & Word Embeddings</h3>
+          
+          <div class="space-y-4">
+            
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q7: Compare Bag of Words (BoW), TF-IDF, and Word2Vec in your project.</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-purple-400">Answer:</b> 
+                - <b>BoW</b> builds sparse count vectors of raw word frequencies without term importance weighting.
+                - <b>TF-IDF</b> scales term frequency by Inverse Document Frequency ($\log(N/df)$), penalizing generic words and highlighting discriminative legal keywords.
+                - <b>Word2Vec</b> produces dense continuous 100-dimensional vectors capturing semantic similarity (e.g. cosine distance between <i>"rescind"</i> and <i>"terminate"</i>), capturing meaning beyond exact keyword matches.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q8: Why did you use N-Gram Analysis (Unigrams, Bigrams, Trigrams)?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-purple-400">Answer:</b> Single words (unigrams) often miss contractual context. For instance, <i>"renewal"</i> is neutral, but the bigram <i>"automatic renewal"</i> or trigram <i>"indemnify and hold"</i> represents specific, actionable risk markers. N-gram feature matrices enable ML models to learn multi-word legal collocations.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q9: How was Word2Vec trained, and what parameters were chosen?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-purple-400">Answer:</b> We used Gensim's Word2Vec with <b>Skip-Gram architecture</b> (<code>sg=1</code>), <code>vector_size=100</code>, <code>window=5</code>, and <code>epochs=35</code> trained across our preprocessed corpus of Indian legal contract clauses. Skip-Gram was chosen over CBOW because it provides superior semantic representations for rare legal terminology.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Category C: Machine Learning & Evaluation -->
+        <div>
+          <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-3">Category C: Machine Learning Classifiers & Evaluation</h3>
+          
+          <div class="space-y-4">
+            
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q10: Why did you evaluate Logistic Regression, Random Forest, and Naive Bayes?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-emerald-400">Answer:</b> 
+                - <b>Logistic Regression</b> is a convex linear model that performs exceptionally well on high-dimensional sparse TF-IDF text matrices.
+                - <b>Random Forest</b> is a non-linear bagging ensemble of decision trees that handles non-linear feature interactions without overfitting.
+                - <b>Multinomial Naive Bayes</b> provides a fast probabilistic baseline utilizing Bayes' Theorem with Laplacian smoothing ($\alpha=0.1$).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q11: Why is Precision vs Recall trade-off critical in legal risk detection?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-emerald-400">Answer:</b> In legal risk assessment, a <b>False Negative</b> (failing to flag a high-risk uncapped liability clause) is catastrophic for an SMB. Therefore, our model optimizes for high <b>Recall on High-Risk classes</b>, ensuring that potential legal hazards are never silently missed.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q12: How is the composite Contract Risk Score (0-100) calculated?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-emerald-400">Answer:</b> We use a weighted composite formula: $\text{Raw Score} = (N_{\text{high}} \times 28) + (N_{\text{medium}} \times 12) + (N_{\text{low}} \times 3)$, normalized against clause count and scaled with penalty boosters if severe triggers (e.g. uncapped liability + unilateral termination) are simultaneously active. Scores $\ge 71$ are classified as High Risk, 36–70 as Moderate Risk, and $\le 35$ as Low Risk.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Category D: Indian Legal Domain & SMB Impact -->
+        <div>
+          <h3 class="text-sm font-bold text-yellow-400 uppercase tracking-wider mb-3">Category D: Indian Legal Domain & Practical SMB Application</h3>
+          
+          <div class="space-y-4">
+            
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q13: What is the significance of Section 27 of the Indian Contract Act, 1872 in non-compete clauses?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-yellow-400">Answer:</b> Section 27 states that <i>"every agreement by which anyone is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void."</i> Under Indian law, post-termination non-compete clauses are generally unenforceable (unlike in some US jurisdictions). Our system flags post-contract non-competes as high-risk and recommends replacing them with enforceable non-solicitation covenants.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q14: What is Section 74 of the Indian Contract Act regarding Liquidated Damages?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-yellow-400">Answer:</b> Section 74 allows courts to award reasonable compensation not exceeding the penalty amount named in the contract, but punitive penalties that do not reflect genuine pre-estimates of loss are impermissible. Our system flags arbitrary penalties (e.g., 2% per day of delay without cap) and advises capping liquidated damages at 5–10% of milestone value.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-white text-xs mb-1">Q15: How can an SMB user utilize the generated PDF report?</div>
+              <p class="text-slate-300 leading-relaxed">
+                <b class="text-yellow-400">Answer:</b> The ReportLab PDF report acts as an <b>Executive Risk Triage Document</b> containing the risk score gauge, extracted entity summary, clause-by-clause AI explanations, and a concrete negotiation counter-proposal checklist that the SMB founder or procurement manager can send directly to opposing counsel.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+</div>
+{% endblock %}

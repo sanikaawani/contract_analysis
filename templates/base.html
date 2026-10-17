@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}AI Contract Risk Analyzer | NLP Legal-Tech for SMBs{% endblock %}</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#EFF6FF',
+              100: '#DBEAFE',
+              500: '#3B82F6',
+              600: '#2563EB',
+              700: '#1D4ED8',
+              800: '#1E40AF',
+              900: '#1E3A8A',
+            },
+            darkbg: '#090D16',
+            cardbg: '#0F172A',
+            bordercol: '#334155'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Feather Icons CDN -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body class="bg-darkbg text-slate-100 antialiased flex flex-col min-h-screen">
+
+  <!-- Navigation Bar -->
+  <header class="glass-nav sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Brand Logo -->
+        <a href="{{ url_for('index') }}" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+            <i data-feather="shield" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <div class="font-bold text-lg text-white tracking-tight flex items-center gap-1.5">
+              <span>Legal<span class="text-blue-500">Risk</span> AI</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 font-mono border border-blue-500/30">NLP</span>
+            </div>
+            <p class="text-[11px] text-slate-400 -mt-1">Contract Intelligence for SMBs</p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1">
+          <a href="{{ url_for('index') }}" class="nav-tab-btn flex items-center gap-2 {% if request.path == '/' %}active{% endif %}">
+            <i data-feather="home" class="w-4 h-4"></i> Home
+          </a>
+          <a href="{{ url_for('upload_page') }}" class="nav-tab-btn flex items-center gap-2 {% if request.path == '/upload' %}active{% endif %}">
+            <i data-feather="upload-cloud" class="w-4 h-4"></i> Upload Contract
+          </a>
+          <a href="{{ url_for('analysis_page') }}" class="nav-tab-btn flex items-center gap-2 {% if request.path == '/analysis' %}active{% endif %}">
+            <i data-feather="activity" class="w-4 h-4"></i> Risk Dashboard
+          </a>
+          <a href="{{ url_for('nlp_lab_page') }}" class="nav-tab-btn flex items-center gap-2 {% if request.path == '/nlp-lab' %}active{% endif %}">
+            <i data-feather="cpu" class="w-4 h-4"></i> NLP Laboratory
+          </a>
+          <a href="{{ url_for('benchmarks_page') }}" class="nav-tab-btn flex items-center gap-2 {% if request.path == '/benchmarks' %}active{% endif %}">
+            <i data-feather="bar-chart-2" class="w-4 h-4"></i> ML Benchmarks
+          </a>
+          <a href="{{ url_for('about_page') }}" class="nav-tab-btn flex items-center gap-2 {% if request.path == '/about' %}active{% endif %}">
+            <i data-feather="book-open" class="w-4 h-4"></i> About & Viva
+          </a>
+        </nav>
+
+        <!-- Right Quick Action -->
+        <div class="flex items-center gap-3">
+          <a href="{{ url_for('upload_page') }}" class="px-4 py-2 text-xs font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-md shadow-blue-600/30 flex items-center gap-1.5 transition-all">
+            <i data-feather="play" class="w-3.5 h-3.5"></i> Analyze Now
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Flash Messages / Global Notifications -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Main Body Content -->
+  <main class="flex-grow">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Modern Legal-Tech Footer -->
+  <footer class="bg-slate-950 border-t border-slate-800/80 mt-16 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white">
+              <i data-feather="shield" class="w-3.5 h-3.5"></i>
+            </div>
+            <span class="font-bold text-white text-sm">LegalRisk AI</span>
+          </div>
+          <p class="text-slate-400 text-[11px] leading-relaxed">
+            AI-Based Contract Risk Analysis and Clause Detection System for Small and Medium-Sized Businesses using Natural Language Processing.
+          </p>
+          <div class="flex items-center gap-2 text-[11px] text-slate-400">
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-blue-400 font-mono">Indian Law Compliant</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-purple-400 font-mono">NLTK + spaCy</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">13 NLP Techniques</h4>
+          <ul class="space-y-1.5 text-[11px]">
+            <li>1-2. Tokenization & Stopwords</li>
+            <li>3-5. Porter, Lancaster, Lemma</li>
+            <li>6-8. POS, Chunking, NER</li>
+            <li>9-10. BoW, N-Grams Collocations</li>
+            <li>11-13. WordNet, Word2Vec, Lesk WSD</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Contract Types</h4>
+          <ul class="space-y-1.5 text-[11px]">
+            <li>Service Agreements (MSA / SOW)</li>
+            <li>Commercial Vendor Contracts</li>
+            <li>Executive Employment Agreements</li>
+            <li>Non-Disclosure Agreements (NDA)</li>
+            <li>Raw Material Supply Agreements</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Academic & Research</h4>
+          <p class="text-[11px] text-slate-400 leading-relaxed mb-3">
+            Final Year NLP Project implementing end-to-end linguistic parsing, machine learning classifiers, and explainable legal diagnostics.
+          </p>
+          <a href="{{ url_for('about_page') }}" class="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 font-semibold text-[11px]">
+            Explore UML & Viva Guide <i data-feather="arrow-right" class="w-3 h-3"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px]">
+        <p>© 2026 AI Contract Risk Analysis System. Built for SMB Legal Empowerment & NLP Research.</p>
+        <p class="text-slate-400">Powered by Python, NLTK, spaCy, Gensim, Scikit-Learn & Flask.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    feather.replace();
+    
+    // Global Toast Notification Helper
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      const colors = {
+        success: 'bg-emerald-900/90 border-emerald-500 text-emerald-100',
+        error: 'bg-rose-900/90 border-rose-500 text-rose-100',
+        warning: 'bg-amber-900/90 border-amber-500 text-amber-100',
+        info: 'bg-blue-900/90 border-blue-500 text-blue-100'
+      };
+
+      const icons = {
+        success: 'check-circle',
+        error: 'alert-triangle',
+        warning: 'alert-circle',
+        info: 'info'
+      };
+
+      toast.className = `flex items-center gap-2.5 px-4 py-3 rounded-xl border shadow-xl backdrop-blur-md pointer-events-auto transition-all transform duration-300 translate-y-2 opacity-0 text-xs font-medium ${colors[type] || colors.info}`;
+      toast.innerHTML = `<i data-feather="${icons[type] || 'info'}" class="w-4 h-4"></i><span>${message}</span>`;
+      
+      container.appendChild(toast);
+      feather.replace();
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 50);
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+  </script>
+  
+  {% block scripts %}{% endblock %}
+</body>
+</html>

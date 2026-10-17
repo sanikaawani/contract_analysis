@@ -1,0 +1,18 @@
+NON-DISCLOSURE AND CONFIDENTIALITY AGREEMENT
+
+This Mutual Non-Disclosure Agreement ("NDA") is made effective as of 1st February 2025 by and between FinTech Innovations India Pvt Ltd ("Disclosing Party"), having its registered office in Mumbai, and SecureCloud Systems LLP ("Receiving Party"), having its registered office in Pune, Maharashtra.
+
+1. PURPOSE
+The parties wish to explore a potential strategic business collaboration and fintech software integration.
+
+2. DEFINITION OF CONFIDENTIAL INFORMATION
+The definition of Confidential Information shall encompass all verbal, visual, written, technical, and perceived communications exchanged at any time, including information already known to the Vendor prior to receipt, customer lists, algorithms, and source code.
+
+3. DURATION AND PERPETUAL OBLIGATIONS
+The Receiving Party's duty of confidentiality shall survive perpetually and indefinitely following expiration or termination of this Agreement. Any disclosure, even inadvertent or required by regulatory authorities, shall constitute an irremediable breach entitling Disclosing Party to immediate punitive injunctive relief.
+
+4. EXCLUSIONS FROM CONFIDENTIALITY
+Confidential Information does not include information that is publicly known through no breach, or independently developed without reference to the disclosed materials.
+
+5. JURISDICTION
+This NDA shall be construed under Indian laws, with exclusive dispute resolution jurisdiction lying with the civil courts of Mumbai.

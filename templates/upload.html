@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% block title %}Upload Contract | AI Contract Risk Analysis{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Upload Contract for NLP Risk Analysis</h1>
+    <p class="text-slate-400 text-xs sm:text-sm mt-1">Upload your contract file or choose from 5 pre-configured authentic Indian legal agreements.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- Left 2 Cols: Upload Box & Contract Editor -->
+    <div class="lg:col-span-2 space-y-6">
+      
+      <!-- Drag and Drop Box -->
+      <div id="drop-zone" class="dropzone p-8 text-center flex flex-col items-center justify-center min-h-[220px] transition-all">
+        <input type="file" id="file-input" class="hidden" accept=".pdf,.docx,.doc,.txt" />
+        
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/10 border border-blue-500/30 text-blue-400 flex items-center justify-center mb-3">
+          <i data-feather="upload-cloud" class="w-7 h-7"></i>
+        </div>
+
+        <h3 class="text-sm font-semibold text-white mb-1">Drag & Drop Contract File Here</h3>
+        <p class="text-xs text-slate-400 mb-3">Supports <span class="text-blue-400 font-mono">PDF, DOCX, TXT</span> (Max 16 MB)</p>
+        
+        <button type="button" onclick="document.getElementById('file-input').click()" class="px-4 py-2 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-500 text-white shadow-md transition-all">
+          Browse Computer Files
+        </button>
+
+        <div id="file-info" class="hidden mt-4 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-emerald-400 flex items-center gap-2">
+          <i data-feather="file" class="w-3.5 h-3.5"></i>
+          <span id="file-name-display">filename.pdf</span>
+        </div>
+      </div>
+
+      <!-- Contract Text Direct Editor / Preview -->
+      <div class="legal-card p-5 border-slate-800">
+        <div class="flex items-center justify-between mb-3">
+          <label for="contract-text" class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <i data-feather="edit-3" class="w-3.5 h-3.5 text-blue-400"></i> Contract Text Content
+          </label>
+          <div class="flex items-center gap-2">
+            <span id="word-count-badge" class="text-[11px] text-slate-400 font-mono">0 words</span>
+            <button type="button" id="clear-btn" class="text-[11px] text-slate-400 hover:text-rose-400 transition-colors">Clear</button>
+          </div>
+        </div>
+
+        <textarea id="contract-text" rows="12" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs font-mono text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none leading-relaxed resize-y" placeholder="Paste full contract text here or click one of the 5 authentic Indian sample agreements on the right..."></textarea>
+      </div>
+
+      <!-- Analyze CTA Bar -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+        <div class="text-xs text-slate-400 flex items-center gap-2">
+          <i data-feather="shield" class="w-4 h-4 text-blue-400"></i>
+          <span>Runs full NLP pipeline + Clause Detection + Risk Scoring</span>
+        </div>
+        <button type="button" id="analyze-btn" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all">
+          <i data-feather="zap" class="w-4 h-4"></i> Run NLP Risk Analysis
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Right Col: Configuration & 5 Sample Contracts -->
+    <div class="space-y-6">
+      
+      <!-- Analysis Configuration -->
+      <div class="legal-card p-5 border-slate-800">
+        <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+          <i data-feather="settings" class="w-3.5 h-3.5 text-blue-400"></i> Configuration
+        </h3>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5">Contract Agreement Type</label>
+            <select id="contract-type-select" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-blue-500">
+              {% for ct in contract_types %}
+              <option value="{{ ct }}">{{ ct }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5">Machine Learning Algorithm</label>
+            <select id="model-select" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-blue-500">
+              <option value="rf" selected>Random Forest Classifier (Ensemble TF-IDF + Rules)</option>
+              <option value="lr">Logistic Regression (TF-IDF + N-Grams)</option>
+              <option value="nb">Multinomial Naive Bayes (Bag of Words / Probabilistic)</option>
+            </select>
+            <p class="text-[10px] text-slate-400 mt-1">Select algorithm to compare classification performance.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1-Click Authentic Indian Sample Contracts -->
+      <div class="legal-card p-5 border-slate-800">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <i data-feather="bookmark" class="w-3.5 h-3.5 text-blue-400"></i> 1-Click Indian Samples
+          </h3>
+          <span class="text-[10px] text-blue-400 font-mono">5 Agreements</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mb-3">Click any contract below to populate realistic commercial agreements instantly:</p>
+
+        <div class="space-y-2.5" id="sample-buttons-container">
+          
+          <button type="button" onclick="loadSampleContract('service_agreement.txt', 'Service Agreement')" class="w-full text-left p-3 rounded-lg bg-slate-900/80 hover:bg-slate-800/80 border border-slate-800 hover:border-blue-500/50 transition-all group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-semibold text-white group-hover:text-blue-400">1. Master Service Agreement</span>
+              <span class="badge-risk-high text-[9px] px-1.5 py-0.5 rounded font-mono">High Risk</span>
+            </div>
+            <p class="text-[10px] text-slate-400 line-clamp-1">Evergreen auto-renewal, uncapped liability, 24-hr exit, 2% daily penalties.</p>
+          </button>
+
+          <button type="button" onclick="loadSampleContract('vendor_agreement.txt', 'Vendor Agreement')" class="w-full text-left p-3 rounded-lg bg-slate-900/80 hover:bg-slate-800/80 border border-slate-800 hover:border-blue-500/50 transition-all group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-semibold text-white group-hover:text-blue-400">2. Commercial Vendor Agreement</span>
+              <span class="badge-risk-med text-[9px] px-1.5 py-0.5 rounded font-mono">Moderate</span>
+            </div>
+            <p class="text-[10px] text-slate-400 line-clamp-1">Net 45 terms, liability capped at 1x contract value, 12-mo non-solicit.</p>
+          </button>
+
+          <button type="button" onclick="loadSampleContract('employment_agreement.txt', 'Employment Agreement')" class="w-full text-left p-3 rounded-lg bg-slate-900/80 hover:bg-slate-800/80 border border-slate-800 hover:border-blue-500/50 transition-all group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-semibold text-white group-hover:text-blue-400">3. Executive Employment Agreement</span>
+              <span class="badge-risk-high text-[9px] px-1.5 py-0.5 rounded font-mono">High Risk</span>
+            </div>
+            <p class="text-[10px] text-slate-400 line-clamp-1">Contains 2-year post-job non-compete (Section 27 Indian Contract Act).</p>
+          </button>
+
+          <button type="button" onclick="loadSampleContract('nda_agreement.txt', 'Non-Disclosure Agreement (NDA)')" class="w-full text-left p-3 rounded-lg bg-slate-900/80 hover:bg-slate-800/80 border border-slate-800 hover:border-blue-500/50 transition-all group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-semibold text-white group-hover:text-blue-400">4. Mutual Non-Disclosure (NDA)</span>
+              <span class="badge-risk-low text-[9px] px-1.5 py-0.5 rounded font-mono">Low Risk</span>
+            </div>
+            <p class="text-[10px] text-slate-400 line-clamp-1">Bilateral 2-year non-disclosure with standard Indian court carve-outs.</p>
+          </button>
+
+          <button type="button" onclick="loadSampleContract('supply_agreement.txt', 'Supply Agreement')" class="w-full text-left p-3 rounded-lg bg-slate-900/80 hover:bg-slate-800/80 border border-slate-800 hover:border-blue-500/50 transition-all group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-semibold text-white group-hover:text-blue-400">5. Raw Material Supply Agreement</span>
+              <span class="badge-risk-low text-[9px] px-1.5 py-0.5 rounded font-mono">Low Risk</span>
+            </div>
+            <p class="text-[10px] text-slate-400 line-clamp-1">Net 30 days, 90-day mutual termination, zero punitive liquidated damages.</p>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script>
+  // Quick Sample Loader
+  async function loadSampleContract(filename, contractType) {
+    try {
+      showToast(`Loading sample: ${filename}...`, 'info');
+      const res = await fetch(`/api/sample/${filename}`);
+      const data = await res.json();
+      if (data.content) {
+        document.getElementById('contract-text').value = data.content;
+        document.getElementById('contract-type-select').value = contractType;
+        document.getElementById('file-name-display').innerText = filename;
+        document.getElementById('file-info').classList.remove('hidden');
+        updateWordCount();
+        showToast(`Loaded ${filename} successfully!`, 'success');
+      }
+    } catch (e) {
+      showToast(`Failed to load sample: ${e.message}`, 'error');
+    }
+  }
+
+  function updateWordCount() {
+    const text = document.getElementById('contract-text').value.trim();
+    const count = text ? text.split(/\s+/).length : 0;
+    document.getElementById('word-count-badge').innerText = `${count.toLocaleString()} words`;
+  }
+
+  document.getElementById('contract-text').addEventListener('input', updateWordCount);
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    document.getElementById('contract-text').value = '';
+    document.getElementById('file-info').classList.add('hidden');
+    updateWordCount();
+  });
+</script>
+{% endblock %}

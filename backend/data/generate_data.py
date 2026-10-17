@@ -1,0 +1,375 @@
+import json
+import os
+
+# Standardized Categories matching user prompt:
+# 1. Automatic Renewal
+# 2. Payment Terms
+# 3. Liability Clauses
+# 4. Penalty Clauses
+# 5. Termination Clauses
+# 6. Confidentiality Clauses
+# 7. Non-Compete Clauses
+# 8. Restrictive Clauses
+# 9. General / Boilerplate
+
+base_clauses = [
+    # 1. Automatic Renewal
+    {
+        "clause_text": "This Agreement shall automatically renew for successive terms of 3 (three) years each unless the Client provides written notice of non-renewal by registered post at least 180 days prior to the expiration of the then-current term.",
+        "category": "Automatic Renewal",
+        "risk_level": "High",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Excessively long lock-in renewal period (3 years)", "Onerous 180-day registered post notice requirement", "Creates unexpected financial liability for SMBs"]
+    },
+    {
+        "clause_text": "The subscription term shall be automatically extended for an indefinite period on a yearly recurring basis, with an automatic price escalation of 15% per annum, unless terminated with 90 days prior written notice.",
+        "category": "Automatic Renewal",
+        "risk_level": "High",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Indefinite auto-extension", "Unilateral compounding price hike (15% p.a.)", "Restricts SMB vendor renegotiation power"]
+    },
+    {
+        "clause_text": "Unless either party gives written notice of termination at least 60 days before the expiry of the Initial Term, this Supply Agreement shall automatically renew for additional one-year periods.",
+        "category": "Automatic Renewal",
+        "risk_level": "Medium",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Standard 60-day auto-renewal window", "Requires active calendar tracking to avoid unwanted extension"]
+    },
+    {
+        "clause_text": "This Agreement will renew automatically for an additional period of six (6) months unless either party notifies the other in writing at least 30 days prior to the expiration date.",
+        "category": "Automatic Renewal",
+        "risk_level": "Low",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Short renewal duration (6 months)", "Standard 30-day notice period easily manageable for SMBs"]
+    },
+    {
+        "clause_text": "The term of this Agreement may be extended only by mutual written consent of both parties executed at least 30 days prior to expiration. No automatic renewal shall apply.",
+        "category": "Automatic Renewal",
+        "risk_level": "Low",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Explicit requirement for mutual written consent", "Zero risk of unintended automatic lock-in"]
+    },
+
+    # 2. Payment Terms
+    {
+        "clause_text": "The Client shall make payments within 120 days from the invoice date. In the event of any disputed item, the Client reserves the right to withhold 100% of all pending invoices across all purchase orders indefinitely until dispute resolution.",
+        "category": "Payment Terms",
+        "risk_level": "High",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Violates MSMED Act 2006 Section 15 mandate (max 45 days)", "Right to withhold unrelated invoices creates severe liquidity crisis for SMBs", "Asymmetric payment terms"]
+    },
+    {
+        "clause_text": "All fees are strictly non-refundable under any circumstance. Payment shall be due immediately upon invoice receipt. Late payments shall incur compound interest at the rate of 3.5% per month (42% per annum) calculated daily.",
+        "category": "Payment Terms",
+        "risk_level": "High",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Exorbitant usurious interest rate (42% p.a.)", "Non-refundable upfront clause despite potential service deficiency", "Unreasonable financial burden"]
+    },
+    {
+        "clause_text": "Payment for supplies shall be released upon milestone completion within 60 days of submission of physical invoices accompanied by satisfactory inspection certificates issued solely by Buyer's quality assurance team.",
+        "category": "Payment Terms",
+        "risk_level": "Medium",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Subjective sole approval condition for payment release", "Extended 60-day credit period"]
+    },
+    {
+        "clause_text": "Invoices shall be payable within 30 days of receipt. Overdue invoices beyond 30 days shall carry simple interest at 1.5% per month in accordance with the Micro, Small and Medium Enterprises Development Act, 2006.",
+        "category": "Payment Terms",
+        "risk_level": "Low",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Compliant with MSMED statutory framework", "Standard commercial credit period"]
+    },
+    {
+        "clause_text": "Buyer agrees to pay Seller within 15 days of verified electronic invoice receipt. Disputed amounts shall be notified within 7 days, and undisputed portions shall be released without delay.",
+        "category": "Payment Terms",
+        "risk_level": "Low",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Favorable cash flow term for vendor/SMB", "Requires partial payment of undisputed amounts"]
+    },
+
+    # 3. Liability Clauses
+    {
+        "clause_text": "The Service Provider shall indemnify, defend, and hold harmless the Client, its affiliates, directors, and agents from and against any and all claims, losses, damages, liabilities, costs, and expenses (including uncapped indirect, consequential, and special damages) arising out of any breach or negligence without any monetary limitation whatsoever.",
+        "category": "Liability Clauses",
+        "risk_level": "High",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Uncapped, unlimited liability clause", "Includes consequential and indirect damages", "Asymmetric one-sided indemnity exposing SMB to existential financial ruin"]
+    },
+    {
+        "clause_text": "Vendor assumes absolute strict liability for any third-party intellectual property infringement, loss of profits, data corruption, or operational interruption incurred by the Buyer, waiving all statutory limits under Indian Law.",
+        "category": "Liability Clauses",
+        "risk_level": "High",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Strict liability standard regardless of fault", "Inclusion of lost profits and consequential losses", "Explicit waiver of statutory protections"]
+    },
+    {
+        "clause_text": "The aggregate total liability of the Vendor under this Agreement for any and all claims shall be capped at 5 times the total contract value paid in the preceding 12 months, excluding direct gross negligence.",
+        "category": "Liability Clauses",
+        "risk_level": "Medium",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Liability cap is relatively high (5x contract fees)", "Better than uncapped but still substantial risk for SMB"]
+    },
+    {
+        "clause_text": "Neither party shall be liable for indirect, consequential, or punitive damages. The total aggregate liability of either party shall be strictly limited to the total fees actually paid under the applicable Statement of Work in the preceding 3 months.",
+        "category": "Liability Clauses",
+        "risk_level": "Low",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Mutual limitation of liability", "Consequential damages waiver included", "Reasonable low liability cap tied to recent fees"]
+    },
+    {
+        "clause_text": "Each party's total aggregate liability arising out of or related to this Agreement shall be limited to the total contract value paid by Customer to Vendor under this Agreement.",
+        "category": "Liability Clauses",
+        "risk_level": "Low",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Standard commercial mutual liability cap", "Balanced protection for both parties"]
+    },
+
+    # 4. Penalty Clauses
+    {
+        "clause_text": "In the event of any delay in delivery or service milestone exceeding 24 hours, the Vendor shall pay liquidated damages of 5% of the total contract value per calendar day of delay, up to a maximum forfeiture of 100% of the contract value, without prejudice to Buyer's right to claim additional damages.",
+        "category": "Penalty Clauses",
+        "risk_level": "High",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Draconian penalty rate (5% per day)", "Unreasonable 24-hour grace period", "Violates Section 74 Indian Contract Act principles against unreasonable penalties"]
+    },
+    {
+        "clause_text": "If the Employee resigns prior to completing 24 months of service, the Employee shall immediately pay to the Company a fixed penalty sum of INR 5,00,000 as training expense reimbursement without requiring proof of actual loss.",
+        "category": "Penalty Clauses",
+        "risk_level": "High",
+        "contract_type": "Employment Agreement",
+        "risk_reasons": ["Disproportionate employment bond penalty", "Unenforceable under Indian law (Section 74) without proof of actual specialized training costs", "High risk of labor litigation"]
+    },
+    {
+        "clause_text": "For any delay in milestone completion, Seller shall be charged a delayed performance fee of 0.5% per week of the delayed portion's value, capped at a maximum of 5% of the relevant Purchase Order value.",
+        "category": "Penalty Clauses",
+        "risk_level": "Medium",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Standard liquidated damages formula", "Reasonable overall ceiling of 5%"]
+    },
+    {
+        "clause_text": "Any service downtime below 99.5% availability in a calendar month shall entitle the Client to a service credit of 2% against next month's invoice, which shall constitute the Client's sole and exclusive remedy.",
+        "category": "Penalty Clauses",
+        "risk_level": "Low",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Fair service credit mechanism", "Designated as sole and exclusive remedy protecting vendor"]
+    },
+    {
+        "clause_text": "Delays caused by verified Force Majeure events or Client delays shall not attract any penalty or liquidated damages, and delivery schedules shall be extended proportionately.",
+        "category": "Penalty Clauses",
+        "risk_level": "Low",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Comprehensive relief from penalties during uncontrollable events"]
+    },
+
+    # 5. Termination Clauses
+    {
+        "clause_text": "The Company may terminate this Agreement immediately at any time without cause and without notice. Upon such termination, the Vendor shall not be entitled to any compensation or payment for work completed in progress.",
+        "category": "Termination Clauses",
+        "risk_level": "High",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Unilateral termination for convenience without notice", "Forfeiture of payment for work already completed", "Extreme commercial unfairness"]
+    },
+    {
+        "clause_text": "Employer reserves the unilateral right to terminate Employee's employment immediately without notice or severance pay for any reason deemed unsatisfactory in the sole and absolute discretion of the Management.",
+        "category": "Termination Clauses",
+        "risk_level": "High",
+        "contract_type": "Employment Agreement",
+        "risk_reasons": ["Arbitrary immediate dismissal without natural justice or severance", "Vague subjective discretion standard"]
+    },
+    {
+        "clause_text": "Either party may terminate this Agreement for convenience by providing 30 days prior written notice, subject to payment of all completed milestones and non-cancellable commitments.",
+        "category": "Termination Clauses",
+        "risk_level": "Medium",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Mutual right to terminate for convenience with standard 30-day notice", "Guarantees payment for work done"]
+    },
+    {
+        "clause_text": "Either party may terminate this Agreement immediately upon written notice if the other party breaches a material obligation and fails to cure such breach within 30 days of receiving written notice specifying the breach.",
+        "category": "Termination Clauses",
+        "risk_level": "Low",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Standard mutual termination for cause with reasonable 30-day cure period", "Protects both parties against sudden exit"]
+    },
+    {
+        "clause_text": "In the event of termination, Buyer shall pay Seller for all goods dispatched and raw materials specifically procured for the Purchase Order prior to the notice date.",
+        "category": "Termination Clauses",
+        "risk_level": "Low",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Full reimbursement for work-in-progress and procured inventory"]
+    },
+
+    # 6. Confidentiality Clauses
+    {
+        "clause_text": "The Receiving Party's duty of confidentiality shall survive perpetually and indefinitely following expiration or termination of this Agreement. Any disclosure, even inadvertent or required by regulatory authorities, shall constitute an irremediable breach entitling Disclosing Party to immediate punitive injunctive relief.",
+        "category": "Confidentiality Clauses",
+        "risk_level": "High",
+        "contract_type": "Non-Disclosure Agreement (NDA)",
+        "risk_reasons": ["Perpetual indefinite confidentiality obligations", "Lack of standard exclusions (regulatory/court orders, publicly available info)", "Inadvertent disclosures treated as willful breach"]
+    },
+    {
+        "clause_text": "The definition of Confidential Information shall encompass all verbal, visual, written, and perceived communications exchanged at any time, including information already known to the Vendor prior to receipt.",
+        "category": "Confidentiality Clauses",
+        "risk_level": "High",
+        "contract_type": "Non-Disclosure Agreement (NDA)",
+        "risk_reasons": ["Overly broad and unworkable definition", "Eliminates prior knowledge exception", "Creates high risk of unintentional breach"]
+    },
+    {
+        "clause_text": "Confidential Information shall remain protected for a period of 5 (five) years from the date of disclosure. The Receiving Party shall exercise reasonable care equivalent to the protection of its own proprietary data.",
+        "category": "Confidentiality Clauses",
+        "risk_level": "Medium",
+        "contract_type": "Non-Disclosure Agreement (NDA)",
+        "risk_reasons": ["5-year duration is somewhat lengthy for rapid-evolving tech/services", "Standard duty of reasonable care"]
+    },
+    {
+        "clause_text": "Confidentiality obligations under this Agreement shall expire 2 (two) years after the date of termination or expiration of this Agreement, except for trade secrets which shall remain confidential as long as protected under applicable law.",
+        "category": "Confidentiality Clauses",
+        "risk_level": "Low",
+        "contract_type": "Non-Disclosure Agreement (NDA)",
+        "risk_reasons": ["Reasonable 2-year survival period", "Standard distinction for bona fide trade secrets"]
+    },
+    {
+        "clause_text": "Confidential Information does not include information that is publicly known, already in possession of the recipient without obligation, or independently developed without reference to the disclosed materials.",
+        "category": "Confidentiality Clauses",
+        "risk_level": "Low",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Includes all standard legal carve-outs protecting the receiving SMB"]
+    },
+
+    # 7. Non-Compete Clauses
+    {
+        "clause_text": "For a period of 3 (three) years following the termination of this Agreement for any reason, the Service Provider and its founders shall not directly or indirectly engage in, advise, invest in, or provide services to any business entity operating within the territory of India or globally that competes with the Client.",
+        "category": "Non-Compete Clauses",
+        "risk_level": "High",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Post-contractual restraint of trade is VOID under Section 27 of the Indian Contract Act 1872", "Overbroad global geographic scope", "Direct threat to SMB's business survival"]
+    },
+    {
+        "clause_text": "The Employee covenants that for 24 months post separation, the Employee shall not work for, consult, or start any business that offers similar services anywhere in South Asia.",
+        "category": "Non-Compete Clauses",
+        "risk_level": "High",
+        "contract_type": "Employment Agreement",
+        "risk_reasons": ["Unlawful restraint under Section 27 Indian Contract Act (Niranjan Shankar Golikari precedent)", "Unenforceable in Indian courts post-employment"]
+    },
+    {
+        "clause_text": "During the term of this Agreement and for 6 months thereafter, the Vendor shall not solicit business from any specific named customer introduced directly by the Company during the engagement.",
+        "category": "Non-Compete Clauses",
+        "risk_level": "Medium",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Narrow non-compete/non-solicit targeting only introduced accounts", "Moderate duration (6 months)"]
+    },
+    {
+        "clause_text": "During the active term of this Agreement, the Consultant shall dedicate reasonable professional efforts and shall not undertake conflicting assignments that directly compromise deliverables under this contract.",
+        "category": "Non-Compete Clauses",
+        "risk_level": "Low",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Valid in-term exclusivity (enforceable under Indian law)", "Does not extend post-termination"]
+    },
+    {
+        "clause_text": "This Agreement contains no post-termination non-compete restrictions. Both parties acknowledge their freedom to engage in competitive commercial endeavors upon contract conclusion.",
+        "category": "Non-Compete Clauses",
+        "risk_level": "Low",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Explicit confirmation of freedom of trade, zero risk"]
+    },
+
+    # 8. Restrictive Clauses
+    {
+        "clause_text": "The Vendor agrees that all intellectual property, inventions, background code, preexisting frameworks, and methodologies utilized or touched during the project shall become the sole and exclusive property of the Client upon creation, with full waiver of all moral and royalty rights.",
+        "category": "Restrictive Clauses",
+        "risk_level": "High",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Hostile IP clause expropriating vendor's preexisting background IP and tools", "Waiver of moral and licensing rights", "Severely damages SMB core assets"]
+    },
+    {
+        "clause_text": "The Contractor is strictly prohibited from hiring or soliciting any employee, contractor, or affiliate of the Company for a period of 5 years post-termination, with mandatory liquidated damages of INR 20,00,000 per violation.",
+        "category": "Restrictive Clauses",
+        "risk_level": "High",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Excessively broad non-solicitation (5 years)", "Draconian fixed liquidated damages", "Severely restricts hiring and networking"]
+    },
+    {
+        "clause_text": "Vendor grants Buyer an exclusive supply right within the state of Maharashtra for a period of 12 months, during which Vendor shall not sell the specified SKU to other distributors in that territory.",
+        "category": "Restrictive Clauses",
+        "risk_level": "Medium",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Territorial exclusivity limits vendor's distribution expansion", "12-month commercial commitment"]
+    },
+    {
+        "clause_text": "Each party retains full ownership of its pre-existing intellectual property, tools, and background know-how. Client receives a non-exclusive, perpetual, royalty-free license to use the deliverables for its internal business purposes.",
+        "category": "Restrictive Clauses",
+        "risk_level": "Low",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Fair IP split protecting SMB's background IP while providing client useful usage license"]
+    },
+    {
+        "clause_text": "Neither party shall actively solicit for employment any key engineering personnel of the other party directly involved in the project during the term and for 6 months thereafter.",
+        "category": "Restrictive Clauses",
+        "risk_level": "Low",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Mutual and reasonable non-solicitation clause (6 months)", "Standard commercial practice"]
+    },
+
+    # 9. General / Boilerplate Clauses
+    {
+        "clause_text": "This Agreement shall be governed by and construed in accordance with the laws of India. The courts in Mumbai, Maharashtra shall have exclusive jurisdiction over any dispute arising under this Agreement.",
+        "category": "General / Boilerplate",
+        "risk_level": "Low",
+        "contract_type": "Service Agreement",
+        "risk_reasons": ["Standard governing law and domestic court jurisdiction clause"]
+    },
+    {
+        "clause_text": "Any dispute, controversy or claim arising out of or relating to this contract shall be settled by arbitration in accordance with the Arbitration and Conciliation Act, 1996 by a sole arbitrator mutually appointed by the parties.",
+        "category": "General / Boilerplate",
+        "risk_level": "Low",
+        "contract_type": "Vendor Agreement",
+        "risk_reasons": ["Standard mutual arbitration under Indian Arbitration and Conciliation Act 1996"]
+    },
+    {
+        "clause_text": "All notices required or permitted under this Agreement shall be in writing and shall be deemed duly given when delivered personally or sent by confirmed email or registered post to the addresses specified herein.",
+        "category": "General / Boilerplate",
+        "risk_level": "Low",
+        "contract_type": "Non-Disclosure Agreement (NDA)",
+        "risk_reasons": ["Standard notice clause with modern email acceptance"]
+    },
+    {
+        "clause_text": "If any provision of this Agreement is held to be invalid or unenforceable, such provision shall be severed and the remaining provisions shall continue in full force and effect.",
+        "category": "General / Boilerplate",
+        "risk_level": "Low",
+        "contract_type": "Employment Agreement",
+        "risk_reasons": ["Standard severability clause preserving contract integrity"]
+    },
+    {
+        "clause_text": "Neither party shall be held liable for failure or delay in performing its obligations under this Agreement if such failure or delay is due to acts of God, war, pandemic, government restrictions, or flood.",
+        "category": "General / Boilerplate",
+        "risk_level": "Low",
+        "contract_type": "Supply Agreement",
+        "risk_reasons": ["Standard bilateral Force Majeure clause"]
+    }
+]
+
+# Systematic balanced expansion across all 9 categories (5 base per category * 4 expansions = 20 per category = 180 balanced samples)
+augmented_dataset = []
+for item in base_clauses:
+    augmented_dataset.append(item)
+
+# Perturbations
+perturbations = [
+    {"Client": "Principal", "Vendor": "Supplier", "30 days": "45 days", "Mumbai": "Bengaluru", "INR 5,00,000": "₹10,00,000"},
+    {"Client": "Customer", "Vendor": "Service Provider", "30 days": "15 days", "Mumbai": "New Delhi", "INR 5,00,000": "INR 2,50,000"},
+    {"Client": "Company", "Vendor": "Contractor", "30 days": "60 days", "Mumbai": "Hyderabad", "INR 5,00,000": "₹15,00,000"}
+]
+
+for p in perturbations:
+    for item in base_clauses:
+        clone = dict(item)
+        text = clone["clause_text"]
+        for k, v in p.items():
+            text = text.replace(k, v)
+        clone["clause_text"] = text
+        augmented_dataset.append(clone)
+
+dataset_path = "C:/Users/JIJAU/.gemini/antigravity/scratch/legal_contract_risk_analyzer/backend/data/indian_contract_clauses.json"
+with open(dataset_path, "w", encoding="utf-8") as f:
+    json.dump(augmented_dataset, f, indent=2)
+
+print(f"Successfully generated {len(augmented_dataset)} balanced clauses across 9 categories.")
